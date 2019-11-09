@@ -31,7 +31,9 @@ public class ServerListener extends Thread {
                     } break;
                 }
             }
-        } catch (IOException | ClassNotFoundException ex) {
+        } catch (IOException ex) {
+            Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
