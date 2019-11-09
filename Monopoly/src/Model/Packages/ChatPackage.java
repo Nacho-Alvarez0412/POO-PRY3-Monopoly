@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Packages;
+package Model.Packages;
 
 /**
  *
- * @author sebasgamboa
+ * @author nacho
  */
 public class ChatPackage extends Package {
+    //Atributos
+    public String message;
     
-    public String mensaje;
-    
-    public ChatPackage(String mensaje) {
-        super("chat");
-        this.mensaje = mensaje;
+    //Metodos
+    public ChatPackage(String message) {
+        super("Chat");
+        this.message = message;
     }
     
 }

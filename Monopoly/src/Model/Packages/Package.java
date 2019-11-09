@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Packages;
+package Model.Packages;
 
 import java.io.Serializable;
 
 /**
  *
- * @author sebasgamboa
+ * @author nacho
  */
 public abstract class Package implements Serializable {
+    //Atributos
+    public String type;
     
-    public String tipo;
-    
-    public Package(String tipo) {
-        this.tipo = tipo;
+    //Metodos
+    public Package(String type){
+        this.type = type;
     }
-    
 }
