@@ -26,21 +26,21 @@ public class ConnectionController extends Thread {
     
     @Override
     public void run(){
-        int cont = 0;
+        int cont = 1;
         try {
             ServerSocket serverSocket = new ServerSocket(5000);
             
             while (cont<=maxUsers) {
                 Socket socket = serverSocket.accept();
                 
-                ClientListener listener = new ClientListener(socket,server);
+                ClientListener listener = new ClientListener(socket,server,cont);
                 server.addClient(listener);
                 listener.start();
-                server.view.ServerLogJTextField.setText(server.view.ServerLogJTextField.getText()+"\n"+"Client joined succesfully");
+                server.view.ServerLogTextArea.append("\nClient "+cont+" joined succesfully");
                 cont++;
             }
             
-            server.view.ServerLogJTextField.setText(server.view.ServerLogJTextField.getText()+"\n"+"Party full ready to start game!");
+            server.view.ServerLogTextArea.append("\nParty full ready to start game!");
             
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);

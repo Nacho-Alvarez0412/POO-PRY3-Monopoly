@@ -5,20 +5,22 @@
  */
 package Model.Game;
 
+import java.io.Serializable;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author nacho
  */
 
-public class GameCharacter {
+public class GameCharacter implements Serializable  {
     //Atributos
     EnumCharacter character;
-    Icon appereance;
+    ImageIcon appereance;
     
     //Metodos
-    public GameCharacter(EnumCharacter character,Icon appereance){
+    public GameCharacter(EnumCharacter character,ImageIcon appereance){
         this.character = character;
         this.appereance = appereance;
     }

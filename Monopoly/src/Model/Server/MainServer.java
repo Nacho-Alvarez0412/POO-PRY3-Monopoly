@@ -5,8 +5,6 @@
  */
 package Model.Server;
 
-import View.ServerView.ServerWindow;
-
 /**
  *
  * @author nacho

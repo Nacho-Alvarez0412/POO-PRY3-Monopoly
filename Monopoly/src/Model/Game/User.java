@@ -5,11 +5,13 @@
  */
 package Model.Game;
 
+import java.io.Serializable;
+
 /**
  *
  * @author nacho
  */
-public class User {
+public class User implements Serializable {
     //Atributos
     String name;
     GameCharacter character;
@@ -27,5 +29,13 @@ public class User {
 
     public GameCharacter getCharacter() {
         return character;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCharacter(GameCharacter character) {
+        this.character = character;
     }
 }

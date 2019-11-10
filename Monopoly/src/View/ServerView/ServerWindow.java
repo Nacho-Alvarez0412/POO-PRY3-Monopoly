@@ -32,9 +32,11 @@ public class ServerWindow extends javax.swing.JFrame {
         CantPlayersSpinBox = new javax.swing.JSpinner();
         CantPlayersLabel = new javax.swing.JLabel();
         ConfirmButton = new javax.swing.JButton();
-        ServerLogJTextField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ServerLogTextArea = new javax.swing.JTextArea();
         MonopolyLabel = new javax.swing.JLabel();
         BackgroundPanel = new javax.swing.JPanel();
+        StartGameButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(206, 230, 208));
@@ -54,16 +56,14 @@ public class ServerWindow extends javax.swing.JFrame {
         getContentPane().add(ConfirmButton);
         ConfirmButton.setBounds(370, 510, 130, 40);
 
-        ServerLogJTextField.setBackground(new java.awt.Color(206, 230, 208));
-        ServerLogJTextField.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        ServerLogJTextField.setAlignmentY(0.0F);
-        ServerLogJTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ServerLogJTextFieldActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ServerLogJTextField);
-        ServerLogJTextField.setBounds(40, 100, 820, 390);
+        ServerLogTextArea.setBackground(new java.awt.Color(206, 230, 208));
+        ServerLogTextArea.setColumns(20);
+        ServerLogTextArea.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
+        ServerLogTextArea.setRows(5);
+        jScrollPane1.setViewportView(ServerLogTextArea);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(40, 100, 820, 390);
 
         MonopolyLabel.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         MonopolyLabel.setText("Monopoly");
@@ -71,27 +71,18 @@ public class ServerWindow extends javax.swing.JFrame {
         MonopolyLabel.setBounds(340, 20, 220, 50);
 
         BackgroundPanel.setBackground(new java.awt.Color(164, 208, 167));
+        BackgroundPanel.setLayout(null);
 
-        javax.swing.GroupLayout BackgroundPanelLayout = new javax.swing.GroupLayout(BackgroundPanel);
-        BackgroundPanel.setLayout(BackgroundPanelLayout);
-        BackgroundPanelLayout.setHorizontalGroup(
-            BackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 960, Short.MAX_VALUE)
-        );
-        BackgroundPanelLayout.setVerticalGroup(
-            BackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
-        );
+        StartGameButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        StartGameButton.setText("Start Game");
+        BackgroundPanel.add(StartGameButton);
+        StartGameButton.setBounds(710, 510, 150, 40);
 
         getContentPane().add(BackgroundPanel);
         BackgroundPanel.setBounds(0, 0, 960, 610);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ServerLogJTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServerLogJTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ServerLogJTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,6 +125,8 @@ public class ServerWindow extends javax.swing.JFrame {
     public javax.swing.JSpinner CantPlayersSpinBox;
     public javax.swing.JButton ConfirmButton;
     private javax.swing.JLabel MonopolyLabel;
-    public javax.swing.JTextField ServerLogJTextField;
+    public javax.swing.JTextArea ServerLogTextArea;
+    public javax.swing.JButton StartGameButton;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

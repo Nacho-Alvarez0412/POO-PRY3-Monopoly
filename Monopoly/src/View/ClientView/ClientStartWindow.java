@@ -16,6 +16,7 @@ public class ClientStartWindow extends javax.swing.JFrame {
      */
     public ClientStartWindow() {
         initComponents();
+        this.setSize(905, 614);
     }
 
     /**
@@ -78,80 +79,81 @@ public class ClientStartWindow extends javax.swing.JFrame {
         PieceLabel.setBounds(20, 190, 90, 30);
 
         BattleshipButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        BattleshipButton.setText("Battleship");
+        BattleshipButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/battleship.png"))); // NOI18N
         MainPanel.add(BattleshipButton);
-        BattleshipButton.setBounds(80, 260, 110, 42);
+        BattleshipButton.setBounds(80, 240, 110, 90);
 
         CatButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        CatButton.setText("Cat");
+        CatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cat.png"))); // NOI18N
         MainPanel.add(CatButton);
-        CatButton.setBounds(210, 330, 110, 42);
+        CatButton.setBounds(210, 350, 110, 90);
 
         CartButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        CartButton.setText("Cart");
+        CartButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cart.png"))); // NOI18N
         MainPanel.add(CartButton);
-        CartButton.setBounds(470, 260, 110, 42);
+        CartButton.setBounds(470, 240, 110, 90);
 
         CarButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        CarButton.setText("Car");
+        CarButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/car.png"))); // NOI18N
         MainPanel.add(CarButton);
-        CarButton.setBounds(340, 260, 110, 42);
+        CarButton.setBounds(340, 240, 110, 90);
 
         DinosaurButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        DinosaurButton.setText("Dinosaur");
+        DinosaurButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dinosaur.png"))); // NOI18N
         MainPanel.add(DinosaurButton);
-        DinosaurButton.setBounds(740, 260, 117, 42);
+        DinosaurButton.setBounds(750, 240, 120, 90);
 
         DogButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        DogButton.setText("Dog");
+        DogButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dog.png"))); // NOI18N
         MainPanel.add(DogButton);
-        DogButton.setBounds(600, 260, 120, 42);
+        DogButton.setBounds(600, 240, 120, 90);
 
         DuckButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        DuckButton.setText("Duck");
+        DuckButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/duck.png"))); // NOI18N
         MainPanel.add(DuckButton);
-        DuckButton.setBounds(80, 330, 110, 42);
+        DuckButton.setBounds(80, 350, 110, 90);
 
         HatButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        HatButton.setText("Hat");
+        HatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/hat.png"))); // NOI18N
         MainPanel.add(HatButton);
-        HatButton.setBounds(210, 260, 110, 42);
+        HatButton.setBounds(210, 240, 110, 90);
 
         IronButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        IronButton.setText("Iron");
+        IronButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/iron.png"))); // NOI18N
         IronButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IronButtonActionPerformed(evt);
             }
         });
         MainPanel.add(IronButton);
-        IronButton.setBounds(470, 330, 110, 42);
+        IronButton.setBounds(470, 350, 110, 90);
 
         PenguinButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        PenguinButton.setText("Penguin");
+        PenguinButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/penguin.png"))); // NOI18N
         MainPanel.add(PenguinButton);
-        PenguinButton.setBounds(340, 330, 109, 42);
+        PenguinButton.setBounds(340, 350, 110, 90);
 
         ShoeButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        ShoeButton.setText("Shoe");
+        ShoeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/shoe.png"))); // NOI18N
         MainPanel.add(ShoeButton);
-        ShoeButton.setBounds(740, 330, 120, 42);
+        ShoeButton.setBounds(750, 350, 120, 90);
 
         ThimbleButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        ThimbleButton.setText("Thimble");
+        ThimbleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/thimble.png"))); // NOI18N
         MainPanel.add(ThimbleButton);
-        ThimbleButton.setBounds(600, 330, 120, 42);
+        ThimbleButton.setBounds(610, 350, 120, 90);
 
         ConfirmButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         ConfirmButton.setText("Confirm");
         MainPanel.add(ConfirmButton);
         ConfirmButton.setBounds(400, 510, 130, 50);
 
-        ServerResponseLabel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        ServerResponseLabel.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         ServerResponseLabel.setForeground(new java.awt.Color(0, 0, 0));
+        ServerResponseLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ServerResponseLabel.setAlignmentX(0.5F);
         MainPanel.add(ServerResponseLabel);
-        ServerResponseLabel.setBounds(400, 460, 260, 40);
+        ServerResponseLabel.setBounds(260, 450, 410, 40);
 
         getContentPane().add(MainPanel);
         MainPanel.setBounds(0, 0, 890, 580);

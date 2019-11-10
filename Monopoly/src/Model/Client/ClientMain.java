@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.Game;
+package Model.Client;
 
-import java.io.Serializable;
+import java.io.IOException;
+
 
 /**
  *
  * @author nacho
  */
-public enum EnumCharacter implements Serializable {
-    Battleship,Car,Cat,Cart,Dinosaur,Dog,Duck,Hat,Iron,Penguin,Shoe,Thimble
+public class ClientMain {
+    public static void main(String args[]) throws IOException {
+        Client client = new Client();
+    }
 }

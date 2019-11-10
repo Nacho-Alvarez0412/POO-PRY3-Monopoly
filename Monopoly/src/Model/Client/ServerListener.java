@@ -7,6 +7,7 @@ package Model.Client;
 
 import Model.Packages.ChatPackage;
 import Model.Packages.Package;
+import Model.Packages.UserRequestPackage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.logging.Level;
@@ -34,14 +35,24 @@ public class ServerListener extends Thread{
                     
                     case "chat":
                         ChatPackage chat = (ChatPackage) packet;
-                        Clients.Client.instancia().window.addMessage(chat.message);
+                        //Put on screen message
                         break;
+                        
+                    case "UserRequest":
+                        UserRequestPackage userPackage = (UserRequestPackage) packet;
+                        
+                        if(userPackage.accepted)
+                            client.startView.ServerResponseLabel.setText("User joined succesfully");
+                        
+                        else
+                            client.startView.ServerResponseLabel.setText("The chosen piece or name has already been selected");
+                            
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(Clients.ServerListener.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Model.Client.ServerListener.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Clients.ServerListener.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Model.Client.ServerListener.class.getName()).log(Level.SEVERE, null, ex);
         }
     
     }
