@@ -33,7 +33,7 @@ public class ServerListener extends Thread{
                 
                 switch (packet.type){
                     
-                    case "chat":
+                    case "Chat":
                         ChatPackage chat = (ChatPackage) packet;
                         //Put on screen message
                         break;
@@ -46,7 +46,18 @@ public class ServerListener extends Thread{
                         
                         else
                             client.startView.ServerResponseLabel.setText("The chosen piece or name has already been selected");
-                            
+                        break;
+                      
+                    case "StartSignal":
+                        client.startView.ServerResponseLabel.setText("Game is about to begin");
+                        try {
+                            sleep(2000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        client.startView.setVisible(false);
+                        client.startView.dispose();
+
                 }
             }
         } catch (IOException ex) {

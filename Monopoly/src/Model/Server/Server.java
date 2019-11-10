@@ -92,6 +92,8 @@ public class Server implements ActionListener {
         
         else if (e.getSource().equals(view.StartGameButton)){
             view.ServerLogTextArea.append("\nStarting game...");
+            StartSignalPackage startSignal = new StartSignalPackage();
+            enviarPaquete(startSignal);
         }
     }
 }
