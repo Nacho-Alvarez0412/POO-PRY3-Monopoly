@@ -17,6 +17,7 @@ public class GameView extends javax.swing.JFrame {
     public GameView() {
         initComponents();
         setSize(1415,940);
+        ChatTextPane.setEditable(false);
         
         //User Print Buttons
         MediterraneanButton.setOpaque(false);
@@ -225,10 +226,13 @@ public class GameView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         TurnLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        RollButton = new javax.swing.JButton();
         EndTurnButton = new javax.swing.JButton();
         Dice2Label = new javax.swing.JLabel();
         Dice1Label = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ChatTextPane = new javax.swing.JTextPane();
+        ChatTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -286,18 +290,15 @@ public class GameView extends javax.swing.JFrame {
         UserInfoPanel.setBackground(new java.awt.Color(164, 208, 167));
         UserInfoPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         UserInfoPanel.setLayout(null);
-
-        UserIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dinosaur.png"))); // NOI18N
         UserInfoPanel.add(UserIconLabel);
         UserIconLabel.setBounds(10, 10, 110, 90);
 
         UserName.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        UserName.setText("Juan");
         UserInfoPanel.add(UserName);
         UserName.setBounds(130, 10, 180, 30);
 
         UserMoneyLabel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        UserMoneyLabel.setText("12345 $");
+        UserMoneyLabel.setText("0 $");
         UserInfoPanel.add(UserMoneyLabel);
         UserMoneyLabel.setBounds(330, 10, 180, 30);
 
@@ -473,18 +474,16 @@ public class GameView extends javax.swing.JFrame {
         PlayeXInfoPanel.setBackground(new java.awt.Color(164, 208, 167));
         PlayeXInfoPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         PlayeXInfoPanel.setLayout(null);
-
-        PlayerXIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/shoe.png"))); // NOI18N
         PlayeXInfoPanel.add(PlayerXIconLabel);
         PlayerXIconLabel.setBounds(10, 10, 110, 90);
 
         PlayerXName.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        PlayerXName.setText("Diego");
+        PlayerXName.setText("Player");
         PlayeXInfoPanel.add(PlayerXName);
         PlayerXName.setBounds(130, 10, 180, 30);
 
         PlayerXMoney.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        PlayerXMoney.setText("12345 $");
+        PlayerXMoney.setText("0 $");
         PlayeXInfoPanel.add(PlayerXMoney);
         PlayerXMoney.setBounds(330, 10, 180, 30);
 
@@ -669,23 +668,33 @@ public class GameView extends javax.swing.JFrame {
         jLabel1.setBounds(10, 10, 90, 30);
 
         TurnLabel.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        TurnLabel.setText("Juan");
         jPanel1.add(TurnLabel);
         TurnLabel.setBounds(100, 10, 190, 30);
 
-        jButton1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jButton1.setText("Roll Dices");
-        jPanel1.add(jButton1);
-        jButton1.setBounds(10, 50, 140, 50);
+        RollButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        RollButton.setText("Roll Dices");
+        jPanel1.add(RollButton);
+        RollButton.setBounds(10, 50, 140, 50);
 
         EndTurnButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         EndTurnButton.setText("END TURN");
         jPanel1.add(EndTurnButton);
         EndTurnButton.setBounds(10, 110, 140, 50);
+
+        Dice2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Red1.jpg"))); // NOI18N
         jPanel1.add(Dice2Label);
-        Dice2Label.setBounds(370, 40, 130, 110);
+        Dice2Label.setBounds(190, 90, 63, 60);
+
+        Dice1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Red1.jpg"))); // NOI18N
         jPanel1.add(Dice1Label);
-        Dice1Label.setBounds(190, 40, 130, 110);
+        Dice1Label.setBounds(190, 20, 63, 60);
+
+        jScrollPane1.setViewportView(ChatTextPane);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(300, 10, 250, 120);
+        jPanel1.add(ChatTextField);
+        ChatTextField.setBounds(300, 130, 250, 24);
 
         infoPanel.add(jPanel1);
         jPanel1.setBounds(830, 650, 560, 170);
@@ -732,86 +741,89 @@ public class GameView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AtlanticButton;
-    private javax.swing.JButton AtlanticXButton;
-    private javax.swing.JButton BOTrainButton;
-    private javax.swing.JButton BOTrainXButton;
-    private javax.swing.JButton BalticButton;
-    private javax.swing.JButton BalticXButton;
+    public javax.swing.JButton AtlanticButton;
+    public javax.swing.JButton AtlanticXButton;
+    public javax.swing.JButton BOTrainButton;
+    public javax.swing.JButton BOTrainXButton;
+    public javax.swing.JButton BalticButton;
+    public javax.swing.JButton BalticXButton;
     private javax.swing.JLabel BoardLabel;
-    private javax.swing.JButton BoardwalkButoon;
-    private javax.swing.JButton BoardwalkXButoon;
-    private javax.swing.JButton BuildButton;
+    public javax.swing.JButton BoardwalkButoon;
+    public javax.swing.JButton BoardwalkXButoon;
+    public javax.swing.JButton BuildButton;
     private javax.swing.JPanel ButtonsPanel;
-    private javax.swing.JButton BuyButton;
-    private javax.swing.JButton CharlesButton;
-    private javax.swing.JButton CharlesXButton;
-    private javax.swing.JButton ConnecticutButton;
-    private javax.swing.JButton ConnecticutXButton;
+    public javax.swing.JButton BuyButton;
+    public javax.swing.JButton CharlesButton;
+    public javax.swing.JButton CharlesXButton;
+    public javax.swing.JTextField ChatTextField;
+    public javax.swing.JTextPane ChatTextPane;
+    public javax.swing.JButton ConnecticutButton;
+    public javax.swing.JButton ConnecticutXButton;
     private javax.swing.JLabel Dice1Label;
     private javax.swing.JLabel Dice2Label;
-    private javax.swing.JButton ElectricButton;
-    private javax.swing.JButton ElectricXButton;
-    private javax.swing.JButton EndTurnButton;
-    private javax.swing.JButton IllionisButton;
-    private javax.swing.JButton IllionisXButton;
-    private javax.swing.JButton IndianaButton;
-    private javax.swing.JButton IndianaXButton;
-    private javax.swing.JButton JamesButton;
-    private javax.swing.JButton JamesXButton;
-    private javax.swing.JButton KentuckyButton;
-    private javax.swing.JButton KentuckyXButton;
-    private javax.swing.JButton MarvinButton;
-    private javax.swing.JButton MarvinXButton;
-    private javax.swing.JButton MediterraneanButton;
-    private javax.swing.JButton MediterraneanXButton;
-    private javax.swing.JButton MortgageButton;
-    private javax.swing.JButton NewYorkButton;
-    private javax.swing.JButton NewYorkXButton;
-    private javax.swing.JButton NextPlayerButton;
-    private javax.swing.JButton NorthButton;
-    private javax.swing.JButton NorthXButton;
-    private javax.swing.JButton OrientalButton;
-    private javax.swing.JButton OrientalXButton;
-    private javax.swing.JButton PacificButton;
-    private javax.swing.JButton PacificXButton;
-    private javax.swing.JButton ParkButton;
-    private javax.swing.JButton ParkXButton;
-    private javax.swing.JButton PennsylvaniaButton;
-    private javax.swing.JButton PennsylvaniaTrainButton;
-    private javax.swing.JButton PennsylvaniaTrainXButton;
+    public javax.swing.JButton ElectricButton;
+    public javax.swing.JButton ElectricXButton;
+    public javax.swing.JButton EndTurnButton;
+    public javax.swing.JButton IllionisButton;
+    public javax.swing.JButton IllionisXButton;
+    public javax.swing.JButton IndianaButton;
+    public javax.swing.JButton IndianaXButton;
+    public javax.swing.JButton JamesButton;
+    public javax.swing.JButton JamesXButton;
+    public javax.swing.JButton KentuckyButton;
+    public javax.swing.JButton KentuckyXButton;
+    public javax.swing.JButton MarvinButton;
+    public javax.swing.JButton MarvinXButton;
+    public javax.swing.JButton MediterraneanButton;
+    public javax.swing.JButton MediterraneanXButton;
+    public javax.swing.JButton MortgageButton;
+    public javax.swing.JButton NewYorkButton;
+    public javax.swing.JButton NewYorkXButton;
+    public javax.swing.JButton NextPlayerButton;
+    public javax.swing.JButton NorthButton;
+    public javax.swing.JButton NorthXButton;
+    public javax.swing.JButton OrientalButton;
+    public javax.swing.JButton OrientalXButton;
+    public javax.swing.JButton PacificButton;
+    public javax.swing.JButton PacificXButton;
+    public javax.swing.JButton ParkButton;
+    public javax.swing.JButton ParkXButton;
+    public javax.swing.JButton PennsylvaniaButton;
+    public javax.swing.JButton PennsylvaniaTrainButton;
+    public javax.swing.JButton PennsylvaniaTrainXButton;
     public javax.swing.JButton PennsylvaniaXButton;
     private javax.swing.JPanel PlayeXInfoPanel;
     public javax.swing.JLabel PlayerXIconLabel;
     public javax.swing.JLabel PlayerXMoney;
-    private javax.swing.JLabel PlayerXName;
-    private javax.swing.JButton ReadingTrainButton;
-    private javax.swing.JButton ReadingTrainXButton;
-    private javax.swing.JButton SellButton;
-    private javax.swing.JButton ShortTrainButton;
-    private javax.swing.JButton ShortTrainXButton;
-    private javax.swing.JButton StatesButton;
-    private javax.swing.JButton StatesXButton;
-    private javax.swing.JButton TenesseeButton;
-    private javax.swing.JButton TenesseeXButton;
-    private javax.swing.JButton TradeButton;
+    public javax.swing.JLabel PlayerXName;
+    public javax.swing.JButton ReadingTrainButton;
+    public javax.swing.JButton ReadingTrainXButton;
+    public javax.swing.JButton RollButton;
+    public javax.swing.JButton SellButton;
+    public javax.swing.JButton ShortTrainButton;
+    public javax.swing.JButton ShortTrainXButton;
+    public javax.swing.JButton StatesButton;
+    public javax.swing.JButton StatesXButton;
+    public javax.swing.JButton TenesseeButton;
+    public javax.swing.JButton TenesseeXButton;
+    public javax.swing.JButton TradeButton;
     public javax.swing.JLabel TurnLabel;
-    private javax.swing.JButton UnmortgageButton;
+    public javax.swing.JButton UnmortgageButton;
     public javax.swing.JLabel UserIconLabel;
     private javax.swing.JPanel UserInfoPanel;
     public javax.swing.JLabel UserMoneyLabel;
     public javax.swing.JLabel UserName;
-    private javax.swing.JButton VentnorButton;
-    private javax.swing.JButton VentnorXButton;
-    private javax.swing.JButton VermontButton;
-    private javax.swing.JButton VermontXButton;
-    private javax.swing.JButton VirginiaButton;
-    private javax.swing.JButton VirginiaXButton;
-    private javax.swing.JButton WaterButton;
-    private javax.swing.JButton WaterXButton;
+    public javax.swing.JButton VentnorButton;
+    public javax.swing.JButton VentnorXButton;
+    public javax.swing.JButton VermontButton;
+    public javax.swing.JButton VermontXButton;
+    public javax.swing.JButton VirginiaButton;
+    public javax.swing.JButton VirginiaXButton;
+    public javax.swing.JButton WaterButton;
+    public javax.swing.JButton WaterXButton;
     private javax.swing.JPanel infoPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

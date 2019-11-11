@@ -8,6 +8,7 @@ package Model.Client;
 import Model.Packages.ChatPackage;
 import Model.Packages.Package;
 import Model.Packages.UserRequestPackage;
+import View.ClientView.RollDiceWindow;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.logging.Level;
@@ -19,9 +20,11 @@ import java.util.logging.Logger;
  */
 public class ServerListener extends Thread{
     Client client;
+    RollDiceWindow view;
     
-    public void init(Client client){
+    public void init(Client client,RollDiceWindow view){
         this.client = client;
+        this.view = view;
     }
     
     @Override
@@ -38,14 +41,23 @@ public class ServerListener extends Thread{
                         //Put on screen message
                         break;
                         
+                    case "DicesRoll":
+                        client.startView.ServerResponseLabel.setText("Reroll the dices");
+                        client.diceView.setVisible(true);
+                        break;
+                        
                     case "UserRequest":
                         UserRequestPackage userPackage = (UserRequestPackage) packet;
                         
-                        if(userPackage.accepted)
+                        if(userPackage.accepted){
                             client.startView.ServerResponseLabel.setText("User joined succesfully");
+                            view.setVisible(true);
+                        }
                         
-                        else
+                        else{
+                            client.startView.ConfirmButton.setEnabled(false);
                             client.startView.ServerResponseLabel.setText("The chosen piece or name has already been selected");
+                        }
                         break;
                       
                     case "StartSignal":
@@ -57,6 +69,8 @@ public class ServerListener extends Thread{
                         }
                         client.startView.setVisible(false);
                         client.startView.dispose();
+                        client.gameController = new GameController(client);
+                        break;
 
                 }
             }

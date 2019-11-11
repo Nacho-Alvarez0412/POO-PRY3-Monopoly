@@ -5,6 +5,7 @@
  */
 package Model.Server;
 
+import Model.Game.User;
 import Model.Packages.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -45,6 +46,7 @@ public class ClientListener extends Thread{
                         boolean authentication = server.authenticateUser(userPackage.user);
                         
                         if(authentication){
+                            userPackage.user.id = this.id;
                             server.addUser(userPackage.user);
                             server.view.ServerLogTextArea.append("\nPlayer "+this.id+": "+userPackage.user.getName()+" Piece: "+userPackage.user.getCharacter().getCharacter()+", joined succesfully");
                             userPackage.setAcceptance(true);
@@ -57,6 +59,12 @@ public class ClientListener extends Thread{
                         }
                         break;
                         
+                    case "DicesRoll":
+                        DicesPackage userRoll = (DicesPackage) packet;
+                        User player = server.findUser(id);
+                        server.view.ServerLogTextArea.append("\n"+player.getName()+" rolled a "+userRoll.value);
+                        player.roll = userRoll.value;
+                        server.setOrder();
                 }
             } catch(IOException | ClassNotFoundException e) { 
                  System.out.println(e); 

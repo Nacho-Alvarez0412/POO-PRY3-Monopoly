@@ -6,17 +6,21 @@
 package Model.Client;
 
 import Model.Game.*;
+import Model.Packages.DicesPackage;
 import Model.Packages.UserRequestPackage;
 import View.ClientView.ClientStartWindow;
+import View.ClientView.RollDiceWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import static java.lang.Thread.sleep;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -26,22 +30,26 @@ public class Client implements ActionListener {
     //Atributos
     public User user;
     public Socket socket;
+    public GameController gameController;
+    
     
     //Ventana ClientStart
     public ClientStartWindow startView;
     
+    //Ventan tirar dados
+    public RollDiceWindow diceView;
+    
     //Metodos
     public Client() throws IOException{
+      initWindows();
       connect("127.0.0.1", 5000);
-      initWindow();
       user = new User("",null);
     }
     
     public void connect(String address,int port) throws IOException{
         socket = new Socket(address,port);
-        
         ServerListener listener = new ServerListener();
-        listener.init(this);
+        listener.init(this,diceView);
         listener.start();
     }
     
@@ -50,7 +58,7 @@ public class Client implements ActionListener {
         out.writeObject(packet);
     }
     
-    public void initWindow(){
+    public void initWindows(){
         startView = new ClientStartWindow();
         startView.setVisible(true);
         
@@ -68,14 +76,19 @@ public class Client implements ActionListener {
         startView.ThimbleButton.addActionListener(this);
         startView.ConfirmButton.addActionListener(this);
         
+        diceView = new RollDiceWindow();
+        
+        diceView.DicesButton.addActionListener(this);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(startView.ConfirmButton)){
             if(user.getCharacter() == null)
-                startView.ServerResponseLabel.setText("Select a piece in roder to continue");
+                startView.ServerResponseLabel.setText("Select a piece in order to continue");
             else{
+                startView.ConfirmButton.setEnabled(false);
                 user.setName(startView.UsernameTextField.getText());
                 UserRequestPackage packet = new UserRequestPackage(user);
                 
@@ -157,6 +170,23 @@ public class Client implements ActionListener {
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/thimble.png"));
             GameCharacter character = new GameCharacter(EnumCharacter.Thimble, appereance);
             user.setCharacter(character);
+        }
+        
+        else if (e.getSource().equals(diceView.DicesButton)){
+            user.rollDices();
+            diceView.Dice1Label.setIcon(user.dices.get(0).getFace());
+            diceView.Dice2Label.setIcon(user.dices.get(1).getFace());
+
+            int value = (user.dices.get(0).getValue()+user.dices.get(1).getValue());
+            DicesPackage packet = new DicesPackage(value);
+                
+            try {
+                enviarPaquete(packet);
+            } catch (IOException ex) {
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            startView.ServerResponseLabel.setText("Waiting for rest of the players");
         }
     }
 }

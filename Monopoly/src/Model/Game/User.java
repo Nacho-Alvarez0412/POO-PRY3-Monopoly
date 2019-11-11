@@ -6,6 +6,7 @@
 package Model.Game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,14 +14,23 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
     //Atributos
-    String name;
-    GameCharacter character;
+    public int id;
+    public String name;
+    public GameCharacter character;
+    public ArrayList<Dice> dices;
+    public int roll;
+    public int money;
     
     
     //Metodos
     public User(String name,GameCharacter character){
         this.name = name;
         this.character = character;
+        money = 1500;
+        roll = 0;
+        dices = new ArrayList();
+        dices.add(new Dice());
+        dices.add(new Dice());
     }
 
     public String getName() {
@@ -37,5 +47,11 @@ public class User implements Serializable {
 
     public void setCharacter(GameCharacter character) {
         this.character = character;
+    }
+    
+    public void rollDices(){
+        for(Dice dice : dices){
+            dice.rollDice();
+        }
     }
 }
