@@ -143,6 +143,7 @@ public class Server implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.ConfirmButton)){
+            view.ConfirmButton.setEnabled(false);
             ConnectionController controller = new ConnectionController(this,(int)view.CantPlayersSpinBox.getValue());
             controller.start();
             view.ServerLogTextArea.setText("Waiting for players to join the party...");

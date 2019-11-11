@@ -17,7 +17,7 @@ public class GameView extends javax.swing.JFrame {
     public GameView() {
         initComponents();
         setSize(1415,940);
-        ChatTextPane.setEditable(false);
+        ChatTextArea.setEditable(false);
         
         //User Print Buttons
         MediterraneanButton.setOpaque(false);
@@ -230,9 +230,9 @@ public class GameView extends javax.swing.JFrame {
         EndTurnButton = new javax.swing.JButton();
         Dice2Label = new javax.swing.JLabel();
         Dice1Label = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        ChatTextPane = new javax.swing.JTextPane();
         ChatTextField = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ChatTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -689,12 +689,24 @@ public class GameView extends javax.swing.JFrame {
         jPanel1.add(Dice1Label);
         Dice1Label.setBounds(190, 20, 63, 60);
 
-        jScrollPane1.setViewportView(ChatTextPane);
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(300, 10, 250, 120);
+        ChatTextField.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        ChatTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ChatTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ChatTextFieldKeyPressed(evt);
+            }
+        });
         jPanel1.add(ChatTextField);
-        ChatTextField.setBounds(300, 130, 250, 24);
+        ChatTextField.setBounds(270, 130, 280, 30);
+
+        ChatTextArea.setEditable(false);
+        ChatTextArea.setColumns(20);
+        ChatTextArea.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        ChatTextArea.setRows(5);
+        jScrollPane2.setViewportView(ChatTextArea);
+
+        jPanel1.add(jScrollPane2);
+        jScrollPane2.setBounds(270, 10, 280, 110);
 
         infoPanel.add(jPanel1);
         jPanel1.setBounds(830, 650, 560, 170);
@@ -704,6 +716,10 @@ public class GameView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ChatTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ChatTextFieldKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChatTextFieldKeyPressed
 
     /**
      * @param args the command line arguments
@@ -755,8 +771,8 @@ public class GameView extends javax.swing.JFrame {
     public javax.swing.JButton BuyButton;
     public javax.swing.JButton CharlesButton;
     public javax.swing.JButton CharlesXButton;
+    public javax.swing.JTextArea ChatTextArea;
     public javax.swing.JTextField ChatTextField;
-    public javax.swing.JTextPane ChatTextPane;
     public javax.swing.JButton ConnecticutButton;
     public javax.swing.JButton ConnecticutXButton;
     private javax.swing.JLabel Dice1Label;
@@ -824,6 +840,6 @@ public class GameView extends javax.swing.JFrame {
     private javax.swing.JPanel infoPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

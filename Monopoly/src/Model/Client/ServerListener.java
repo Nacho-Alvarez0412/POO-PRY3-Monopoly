@@ -37,11 +37,13 @@ public class ServerListener extends Thread{
                 switch (packet.type){
                     
                     case "Chat":
-                        ChatPackage chat = (ChatPackage) packet;
-                        //Put on screen message
+                        ChatPackage chatPackage = (ChatPackage) packet;
+                        String message = chatPackage.message;
+                        client.gameController.view.ChatTextArea.append(message+"\n");
                         break;
                         
                     case "DicesRoll":
+                        client.diceView.DicesButton.setEnabled(true);
                         client.startView.ServerResponseLabel.setText("Reroll the dices");
                         client.diceView.setVisible(true);
                         break;

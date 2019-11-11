@@ -173,6 +173,7 @@ public class Client implements ActionListener {
         }
         
         else if (e.getSource().equals(diceView.DicesButton)){
+            diceView.DicesButton.setEnabled(false);
             user.rollDices();
             diceView.Dice1Label.setIcon(user.dices.get(0).getFace());
             diceView.Dice2Label.setIcon(user.dices.get(1).getFace());

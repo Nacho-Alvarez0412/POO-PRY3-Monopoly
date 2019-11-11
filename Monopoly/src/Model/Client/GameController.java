@@ -5,9 +5,13 @@
  */
 package Model.Client;
 
+import Model.Packages.ChatPackage;
 import View.ClientView.GameView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -100,6 +104,9 @@ class GameController implements ActionListener {
         view.TradeButton.addActionListener(this);
         view.BuyButton.addActionListener(this);
         
+        //Chat TextField
+        view.ChatTextField.addActionListener(this);
+        
         //Set User Stats
         setUserStats();
         
@@ -113,11 +120,16 @@ class GameController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if (e.getSource().equals(view.ChatTextField)){
+            String msj = view.ChatTextField.getText();
+            view.ChatTextField.setText("");
+
+            ChatPackage chat = new ChatPackage(msj);
+            try {
+                client.enviarPaquete(chat);
+            } catch (IOException ex) {
+                Logger.getLogger(GameView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-
-    
-
-    
-    
 }

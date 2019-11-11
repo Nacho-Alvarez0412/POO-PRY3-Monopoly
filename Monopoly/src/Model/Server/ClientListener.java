@@ -37,7 +37,11 @@ public class ClientListener extends Thread{
                 switch (packet.type){
                     
                     case "Chat":
-                        server.enviarPaquete(packet);
+                        ChatPackage messagePackage = (ChatPackage) packet;
+                        String message = messagePackage.message;
+                        message = server.findUser(id).name +": "+message;
+                        messagePackage.message = message;
+                        server.enviarPaquete(messagePackage);
                         break;
                         
                         
