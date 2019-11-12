@@ -65,10 +65,21 @@ public class ClientListener extends Thread{
                         
                     case "DicesRoll":
                         DicesPackage userRoll = (DicesPackage) packet;
-                        User player = server.findUser(id);
-                        server.view.ServerLogTextArea.append("\n"+player.getName()+" rolled a "+userRoll.value);
-                        player.roll = userRoll.value;
-                        server.setOrder();
+                        if(server.gameState){
+                            String Servermessage ="Server: " + server.findUser(id).name + " rolled a "+userRoll.value;
+                            server.enviarPaquete(new ChatPackage(Servermessage));
+                        }
+                        else{
+                            User player = server.findUser(id);
+                            server.view.ServerLogTextArea.append("\n"+player.getName()+" rolled a "+userRoll.value);
+                            player.roll = userRoll.value;
+                            server.setOrder();
+                        }
+                        break;
+                        
+                    case "Turn":
+                        server.game.setUserTurn(false);
+                        break;
                 }
             } catch(IOException | ClassNotFoundException e) { 
                  System.out.println(e); 

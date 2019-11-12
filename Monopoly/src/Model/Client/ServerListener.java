@@ -7,6 +7,7 @@ package Model.Client;
 
 import Model.Packages.ChatPackage;
 import Model.Packages.Package;
+import Model.Packages.TurnPackage;
 import Model.Packages.UserRequestPackage;
 import View.ClientView.RollDiceWindow;
 import java.io.IOException;
@@ -57,7 +58,7 @@ public class ServerListener extends Thread{
                         }
                         
                         else{
-                            client.startView.ConfirmButton.setEnabled(false);
+                            client.startView.ConfirmButton.setEnabled(true);
                             client.startView.ServerResponseLabel.setText("The chosen piece or name has already been selected");
                         }
                         break;
@@ -72,6 +73,15 @@ public class ServerListener extends Thread{
                         client.startView.setVisible(false);
                         client.startView.dispose();
                         client.gameController = new GameController(client);
+                        break;
+                        
+                    case "Turn":
+                        TurnPackage turnInfo = (TurnPackage) packet;
+                        client.gameController.view.TurnLabel.setText(turnInfo.name);
+                        
+                        if(turnInfo.name.equals(client.user.name)){
+                            client.gameController.view.RollButton.setEnabled(true);
+                        }
                         break;
 
                 }

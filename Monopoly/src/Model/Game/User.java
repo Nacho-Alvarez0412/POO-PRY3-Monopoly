@@ -20,6 +20,7 @@ public class User implements Serializable {
     public ArrayList<Dice> dices;
     public int roll;
     public int money;
+    public int index;
     
     
     //Metodos
@@ -53,5 +54,6 @@ public class User implements Serializable {
         for(Dice dice : dices){
             dice.rollDice();
         }
+        roll = dices.get(0).value + dices.get(1).value;
     }
 }

@@ -6,6 +6,8 @@
 package Model.Client;
 
 import Model.Packages.ChatPackage;
+import Model.Packages.DicesPackage;
+import Model.Packages.TurnPackage;
 import View.ClientView.GameView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -129,6 +131,33 @@ class GameController implements ActionListener {
                 client.enviarPaquete(chat);
             } catch (IOException ex) {
                 Logger.getLogger(GameView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        if (e.getSource().equals(view.RollButton)){
+            view.EndTurnButton.setEnabled(true);
+            view.RollButton.setEnabled(false);
+            
+            client.user.rollDices();
+            
+            view.Dice1Label.setIcon(client.user.dices.get(0).getFace());
+            view.Dice2Label.setIcon(client.user.dices.get(1).getFace());
+            
+            try {
+                client.enviarPaquete(new DicesPackage(client.user.roll));
+            } catch (IOException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        if (e.getSource().equals(view.EndTurnButton)){
+            view.EndTurnButton.setEnabled(false);
+            view.RollButton.setEnabled(false);
+            
+            try {
+                client.enviarPaquete(new TurnPackage(""));
+            } catch (IOException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

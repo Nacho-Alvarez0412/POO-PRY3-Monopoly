@@ -18,6 +18,8 @@ public class GameView extends javax.swing.JFrame {
         initComponents();
         setSize(1415,940);
         ChatTextArea.setEditable(false);
+        RollButton.setEnabled(false);
+        EndTurnButton.setEnabled(false);
         
         //User Print Buttons
         MediterraneanButton.setOpaque(false);
@@ -775,8 +777,8 @@ public class GameView extends javax.swing.JFrame {
     public javax.swing.JTextField ChatTextField;
     public javax.swing.JButton ConnecticutButton;
     public javax.swing.JButton ConnecticutXButton;
-    private javax.swing.JLabel Dice1Label;
-    private javax.swing.JLabel Dice2Label;
+    public javax.swing.JLabel Dice1Label;
+    public javax.swing.JLabel Dice2Label;
     public javax.swing.JButton ElectricButton;
     public javax.swing.JButton ElectricXButton;
     public javax.swing.JButton EndTurnButton;

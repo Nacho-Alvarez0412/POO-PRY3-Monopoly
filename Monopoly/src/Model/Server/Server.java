@@ -5,6 +5,7 @@
  */
 package Model.Server;
 
+import Model.Game.Game;
 import Model.Game.User;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -26,11 +27,14 @@ public class Server implements ActionListener {
     public ArrayList<ClientListener> listeners;
     public ArrayList<User> players;
     public ServerWindow view;
+    public Game game;
+    public boolean gameState;
     
     public Server(){
         initWindow();
         listeners = new ArrayList<>();
         players = new ArrayList<>();
+        gameState = false;
         view.ServerLogTextArea.setText("Waiting for party size confirmation...");
         
     }
@@ -139,6 +143,11 @@ public class Server implements ActionListener {
         orderUsers();
         printOrder();
     }
+    
+    public void initGame(){
+        game = new Game(players,this);
+        game.start();
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -155,6 +164,8 @@ public class Server implements ActionListener {
                 view.ServerLogTextArea.append("\nStarting game...");
                 StartSignalPackage startSignal = new StartSignalPackage();
                 enviarPaquete(startSignal);
+                initGame();
+                gameState = true;
             }
             else{
                 view.ServerLogTextArea.append("\nPlayers no ready yet...");
