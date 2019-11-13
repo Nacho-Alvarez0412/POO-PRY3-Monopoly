@@ -5,14 +5,18 @@
  */
 package Model.Packages;
 
+import Model.Game.Property;
+import java.util.ArrayList;
+
 /**
  *
  * @author nacho
  */
 public class StartSignalPackage extends Package {
-    
-    public StartSignalPackage() {
+    public ArrayList<Property> properties;
+    public StartSignalPackage(ArrayList<Property> properties) {
         super("StartSignal");
+        this.properties = properties;
     }
     
 }

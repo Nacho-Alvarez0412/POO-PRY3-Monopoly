@@ -22,8 +22,13 @@ public class Game extends Thread{
     boolean victory;
     boolean userTurn;
     ArrayList<Card> board;
+    ArrayList<Property> properties;
     ArrayList<Wildcard> fortuneDeck;
     ArrayList<Wildcard> communityChestDeck;
+
+    public ArrayList<Property> getProperties() {
+        return properties;
+    }
     
     public Game(ArrayList<User> players,Server server){
         this.players = players;
@@ -32,6 +37,7 @@ public class Game extends Thread{
         victory = false;
         BoardGenerator boardGenerator = new BoardGenerator();
         board = boardGenerator.board;
+        properties = boardGenerator.properties;
         fortuneDeck = boardGenerator.fortune;
         communityChestDeck = boardGenerator.communityChest;
     }

@@ -7,12 +7,13 @@ package Model.Game;
 
 import static Model.Game.EnumCardType.*;
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  *
  * @author nacho
  */
-public class Property extends Card {
+public class Property extends Card implements Serializable{
     Color color;
     String name;
     int rent;
@@ -22,7 +23,7 @@ public class Property extends Card {
     int buildingPrice;
     int mortagePrice;
     int price;
-    boolean owned;
+    User owner;
     
     
     
@@ -35,10 +36,26 @@ public class Property extends Card {
         houses = 0;
         hotel = false;
         mortgaged = false;
-        owned = false;
+        owner = null;
         this.buildingPrice = buildingPrice;
         this.mortagePrice = mortagePrice;
         this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public int getMortagePrice() {
@@ -76,8 +93,6 @@ public class Property extends Card {
     public int getBuildingPrice() {
         return buildingPrice;
     }
-
-   
 
     public void addHouses() {
         if(houses<4)

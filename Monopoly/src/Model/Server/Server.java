@@ -146,7 +146,6 @@ public class Server implements ActionListener {
     
     public void initGame(){
         game = new Game(players,this);
-        game.start();
     }
 
     @Override
@@ -161,11 +160,13 @@ public class Server implements ActionListener {
         else if (e.getSource().equals(view.StartGameButton)){
             
             if(!areEquals()){
-                view.ServerLogTextArea.append("\nStarting game...");
-                StartSignalPackage startSignal = new StartSignalPackage();
-                enviarPaquete(startSignal);
                 initGame();
+                view.ServerLogTextArea.append("\nStarting game...");
+                StartSignalPackage startSignal = new StartSignalPackage(game.getProperties());
+                enviarPaquete(startSignal);
+                
                 gameState = true;
+                game.start();
             }
             else{
                 view.ServerLogTextArea.append("\nPlayers no ready yet...");

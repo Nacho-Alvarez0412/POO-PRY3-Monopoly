@@ -8,6 +8,7 @@ package Model.Client;
 import Model.Game.User;
 import Model.Packages.ChatPackage;
 import Model.Packages.Package;
+import Model.Packages.StartSignalPackage;
 import Model.Packages.TurnPackage;
 import Model.Packages.UserInfoRequestPackage;
 import Model.Packages.UserRequestPackage;
@@ -66,6 +67,7 @@ public class ServerListener extends Thread{
                         break;
                       
                     case "StartSignal":
+                        StartSignalPackage startPackage = (StartSignalPackage) packet;
                         client.startView.ServerResponseLabel.setText("Game is about to begin");
                         try {
                             sleep(2000);
@@ -74,7 +76,7 @@ public class ServerListener extends Thread{
                         }
                         client.startView.setVisible(false);
                         client.startView.dispose();
-                        client.gameController = new GameController(client);
+                        client.gameController = new GameController(client,startPackage.properties);
                         break;
                         
                     case "Turn":
