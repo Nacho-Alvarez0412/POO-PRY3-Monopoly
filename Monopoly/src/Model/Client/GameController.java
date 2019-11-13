@@ -12,6 +12,8 @@ import Model.Packages.TurnPackage;
 import Model.Packages.UserInfoRequestPackage;
 import View.ClientView.GameView;
 import View.ClientView.PropertyView;
+import View.ClientView.RailroadView;
+import View.ClientView.ServiceView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -486,8 +488,121 @@ class GameController  implements ActionListener {
             }
         }
         
-        if (e.getSource().equals(view.MediterraneanButton)){
+        if (e.getSource().equals(view.MediterraneanButton) || e.getSource().equals(view.MediterraneanXButton)){
             new PropertyView(searchProperty("Mediterranean Avenue")).setVisible(true);
         }
+        
+        if (e.getSource().equals(view.BalticButton) || e.getSource().equals(view.BalticXButton)){
+            new PropertyView(searchProperty("Baltic Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.ReadingTrainButton) || e.getSource().equals(view.ReadingTrainXButton)){
+            new RailroadView(searchProperty("Reading Railroad")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.OrientalButton) || e.getSource().equals(view.OrientalXButton)){
+            new PropertyView(searchProperty("Oriental Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.VermontButton) || e.getSource().equals(view.VermontXButton)){
+            new PropertyView(searchProperty("Vermont Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.ConnecticutButton) || e.getSource().equals(view.ConnecticutXButton)){
+            new PropertyView(searchProperty("Connecticut Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.CharlesButton) || e.getSource().equals(view.CharlesXButton)){
+            new PropertyView(searchProperty("St. Charles Place")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.StatesButton) || e.getSource().equals(view.StatesXButton)){
+            new PropertyView(searchProperty("States Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.VirginiaButton) || e.getSource().equals(view.VirginiaXButton)){
+            new PropertyView(searchProperty("Virginia Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.JamesButton) || e.getSource().equals(view.JamesXButton)){
+            new PropertyView(searchProperty("St. James Place")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.TenesseeButton) || e.getSource().equals(view.TenesseeXButton)){
+            new PropertyView(searchProperty("Tenessee Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.NewYorkButton) || e.getSource().equals(view.NewYorkXButton)){
+            new PropertyView(searchProperty("New York Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.KentuckyButton) || e.getSource().equals(view.KentuckyXButton)){
+            new PropertyView(searchProperty("Kentucky Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.IndianaButton) || e.getSource().equals(view.IndianaXButton)){
+            new PropertyView(searchProperty("Indiana Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.IllionisButton) || e.getSource().equals(view.IllionisXButton)){
+            new PropertyView(searchProperty("Illinois Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.AtlanticButton) || e.getSource().equals(view.AtlanticXButton)){
+            new PropertyView(searchProperty("Atlantic Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.VentnorButton) || e.getSource().equals(view.VentnorXButton)){
+            new PropertyView(searchProperty("Ventor Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.MarvinButton) || e.getSource().equals(view.MarvinXButton)){
+            new PropertyView(searchProperty("Marvin Gardens")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.PacificButton) || e.getSource().equals(view.PacificXButton)){
+            new PropertyView(searchProperty("Pacific Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.NorthButton) || e.getSource().equals(view.NorthXButton)){
+            new PropertyView(searchProperty("North Carolina Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.PennsylvaniaButton) || e.getSource().equals(view.PennsylvaniaXButton)){
+            new PropertyView(searchProperty("Pennsylvania Avenue")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.ParkButton) || e.getSource().equals(view.ParkXButton)){
+            new PropertyView(searchProperty("Park Place")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.BoardwalkButoon) || e.getSource().equals(view.BoardwalkXButoon)){
+            new PropertyView(searchProperty("Boardwalk")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.PennsylvaniaTrainButton) || e.getSource().equals(view.PennsylvaniaTrainXButton)){
+            new RailroadView(searchProperty("Pennsylvania Railroad")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.BOTrainButton) || e.getSource().equals(view.BOTrainXButton)){
+            new RailroadView(searchProperty("B. & O. Railroad")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.ShortTrainButton) || e.getSource().equals(view.ShortTrainXButton)){
+            new RailroadView(searchProperty("Short Line")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.ElectricButton) || e.getSource().equals(view.ElectricXButton)){
+            new ServiceView(searchProperty("Electric Company")).setVisible(true);
+        }
+        
+        if (e.getSource().equals(view.WaterButton) || e.getSource().equals(view.WaterXButton)){
+            new ServiceView(searchProperty("Water Works")).setVisible(true);
+        }
+        
+        
+        
+        
+        
     }
 }
