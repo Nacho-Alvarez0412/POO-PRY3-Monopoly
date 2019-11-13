@@ -58,7 +58,7 @@ public final class BoardGenerator {
     public void generatePinkProperties(){
         properties.add(new Property(Color.PINK,"St. Charles Place",10,100,70,140));
         properties.add(new Property(Color.PINK,"States Avenue",10,100,70,140));
-        properties.add(new Property(Color.PINK,"Connecticut Avenue",12,100,80,160));
+        properties.add(new Property(Color.PINK,"Virginia Avenue",12,100,80,160));
     }
     
     public void generateOrangeProperties(){
@@ -70,7 +70,7 @@ public final class BoardGenerator {
     public void generateRedProperties(){
         properties.add(new Property(Color.RED,"Kentucky Avenue",18,150,110,220));
         properties.add(new Property(Color.RED,"Indiana Avenue",18,150,110,220));
-        properties.add(new Property(Color.RED,"New York Avenue",20,150,120,240));
+        properties.add(new Property(Color.RED,"Illinois Avenue",20,150,120,240));
     }
     
     public void generateYellowProperties(){

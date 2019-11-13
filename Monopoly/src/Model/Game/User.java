@@ -5,6 +5,7 @@
  */
 package Model.Game;
 
+import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class User implements Serializable {
     public String name;
     public GameCharacter character;
     public ArrayList<Dice> dices;
+    public ArrayList<Property> properties;
     public int roll;
     public int money;
     public int index;
@@ -55,5 +57,23 @@ public class User implements Serializable {
             dice.rollDice();
         }
         roll = dices.get(0).value + dices.get(1).value;
+    }
+    
+    public boolean possesMonopoly(Color color,int cant){
+        for(Property terrain : properties){
+            if(terrain.color.equals(color))
+                cant--;
+            if(cant == 0)
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean possesProperty(String name){
+        for(Property terrain : properties){
+            if(terrain.name.equals(name))
+                return true;
+        }
+        return false;
     }
 }

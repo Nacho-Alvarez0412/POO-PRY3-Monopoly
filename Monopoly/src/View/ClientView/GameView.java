@@ -305,11 +305,13 @@ public class GameView extends javax.swing.JFrame {
         UserMoneyLabel.setBounds(330, 10, 180, 30);
 
         BalticButton.setBackground(new java.awt.Color(153, 51, 0));
+        BalticButton.setText("B2");
         BalticButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 51, 0), 2));
         UserInfoPanel.add(BalticButton);
         BalticButton.setBounds(80, 130, 50, 50);
 
         MediterraneanButton.setBackground(new java.awt.Color(153, 51, 0));
+        MediterraneanButton.setText("B1");
         MediterraneanButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 51, 0), 2));
         UserInfoPanel.add(MediterraneanButton);
         MediterraneanButton.setBounds(20, 130, 50, 50);

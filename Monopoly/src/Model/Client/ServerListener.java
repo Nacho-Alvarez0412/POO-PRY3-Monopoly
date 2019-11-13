@@ -5,9 +5,11 @@
  */
 package Model.Client;
 
+import Model.Game.User;
 import Model.Packages.ChatPackage;
 import Model.Packages.Package;
 import Model.Packages.TurnPackage;
+import Model.Packages.UserInfoRequestPackage;
 import Model.Packages.UserRequestPackage;
 import View.ClientView.RollDiceWindow;
 import java.io.IOException;
@@ -82,6 +84,22 @@ public class ServerListener extends Thread{
                         if(turnInfo.name.equals(client.user.name)){
                             client.gameController.view.RollButton.setEnabled(true);
                         }
+                        break;
+                        
+                    case "InfoRequest":
+                        UserInfoRequestPackage userInfo = (UserInfoRequestPackage) packet;
+                        
+                        User user = userInfo.user;
+                        client.gameController.userIndex = userInfo.userIndex;
+                        
+                        client.gameController.view.PlayerXName.setText(user.name);
+                        client.gameController.view.PlayerXMoney.setText("$ "+user.money);
+                        client.gameController.view.PlayerXIconLabel.setIcon(user.character.getAppereance());
+                        client.gameController.printXProperties(user.properties);
+                        
+                        
+                        
+                        
                         break;
 
                 }
