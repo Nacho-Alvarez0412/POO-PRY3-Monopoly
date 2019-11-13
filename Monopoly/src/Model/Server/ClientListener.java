@@ -83,13 +83,18 @@ public class ClientListener extends Thread{
                         
                     case "InfoRequest":
                         UserInfoRequestPackage infoRequest = (UserInfoRequestPackage) packet;
+                        if(infoRequest.userIndex >= server.players.size())
+                            infoRequest.userIndex = 0;
+                        
                         User user = server.players.get(infoRequest.userIndex);
                         if(user.id == this.id ){
                             infoRequest.userIndex++;
+                            
+                            if(infoRequest.userIndex >= server.players.size())
+                            infoRequest.userIndex = 0;
+                            
                             user = server.players.get(infoRequest.userIndex);
                         }
-                        if(infoRequest.userIndex >= server.players.size())
-                            infoRequest.userIndex = 0;
                         infoRequest.userIndex++;
                         infoRequest.user = user;
                         

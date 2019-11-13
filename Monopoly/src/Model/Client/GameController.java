@@ -166,6 +166,14 @@ class GameController  implements ActionListener {
                 Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+        if (e.getSource().equals(view.NextPlayerButton)){
+            try {
+                getUserInfo();
+            } catch (IOException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     private void getUserInfo() throws IOException{

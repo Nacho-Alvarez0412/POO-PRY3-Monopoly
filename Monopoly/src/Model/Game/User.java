@@ -34,6 +34,8 @@ public class User implements Serializable {
         dices = new ArrayList();
         dices.add(new Dice());
         dices.add(new Dice());
+        properties = new ArrayList<>();
+        properties.add(new Property(Color.WHITE,"Mediterranean Avenue",2,50,20,60));
     }
 
     public String getName() {

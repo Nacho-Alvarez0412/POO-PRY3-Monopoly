@@ -5,10 +5,12 @@
  */
 package Model.Game;
 
+import java.io.Serializable;
+
 /**
  *
  * @author nacho
  */
-public enum EnumSpecialType {
+public enum EnumSpecialType implements Serializable{
     Go,Jail,ParkZone,ToJail,IncomeTax,LuxuryTax, Chance, CommunityChest
 }

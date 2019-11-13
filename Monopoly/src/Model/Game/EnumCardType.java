@@ -5,10 +5,12 @@
  */
 package Model.Game;
 
+import java.io.Serializable;
+
 /**
  *
  * @author nacho
  */
-public enum EnumCardType {
+public enum EnumCardType implements Serializable {
     Property,Wildcard,Special
 }
