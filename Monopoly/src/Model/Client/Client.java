@@ -99,73 +99,85 @@ public class Client implements ActionListener {
         
         else if (e.getSource().equals(startView.BattleshipButton)){
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/battleship.png"));
-            GameCharacter character = new GameCharacter(EnumCharacter.Battleship,appereance );
+            ImageIcon inGameappereance = new ImageIcon(getClass().getResource("/Images/InGameBattleship.png"));
+            GameCharacter character = new GameCharacter(EnumCharacter.Battleship,appereance,inGameappereance );
             user.setCharacter(character);
         }
         
         else if (e.getSource().equals(startView.CarButton)){
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/car.png"));
-            GameCharacter character = new GameCharacter(EnumCharacter.Car, appereance);
+            ImageIcon inGameappereance = new ImageIcon(getClass().getResource("/Images/InGameCar.png"));
+            GameCharacter character = new GameCharacter(EnumCharacter.Car,appereance,inGameappereance );
             user.setCharacter(character);
         }
         
         else if (e.getSource().equals(startView.CartButton)){
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/cart.png"));
-            GameCharacter character = new GameCharacter(EnumCharacter.Cart, appereance);
+            ImageIcon inGameappereance = new ImageIcon(getClass().getResource("/Images/InGameCart.png"));
+            GameCharacter character = new GameCharacter(EnumCharacter.Cart,appereance,inGameappereance );
             user.setCharacter(character);
         }
         
         else if (e.getSource().equals(startView.CatButton)){
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/cat.png"));
-            GameCharacter character = new GameCharacter(EnumCharacter.Cat, appereance);
+            ImageIcon inGameappereance = new ImageIcon(getClass().getResource("/Images/InGameCat.png"));
+            GameCharacter character = new GameCharacter(EnumCharacter.Cat,appereance,inGameappereance );
             user.setCharacter(character);
         }
         
         else if (e.getSource().equals(startView.DinosaurButton)){
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/dinosaur.png"));
-            GameCharacter character = new GameCharacter(EnumCharacter.Dinosaur, appereance);
+            ImageIcon inGameappereance = new ImageIcon(getClass().getResource("/Images/InGameDinosaur.png"));
+            GameCharacter character = new GameCharacter(EnumCharacter.Dinosaur,appereance,inGameappereance );
             user.setCharacter(character);
         }
         
         else if (e.getSource().equals(startView.DogButton)){
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/dog.png"));
-            GameCharacter character = new GameCharacter(EnumCharacter.Dog, appereance);
+            ImageIcon inGameappereance = new ImageIcon(getClass().getResource("/Images/InGameDog.png"));
+            GameCharacter character = new GameCharacter(EnumCharacter.Dog,appereance,inGameappereance );
             user.setCharacter(character);
         }
         
         else if (e.getSource().equals(startView.DuckButton)){
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/duck.png"));
-            GameCharacter character = new GameCharacter(EnumCharacter.Duck, appereance);
+            ImageIcon inGameappereance = new ImageIcon(getClass().getResource("/Images/InGameDuck.png"));
+            GameCharacter character = new GameCharacter(EnumCharacter.Duck,appereance,inGameappereance );
             user.setCharacter(character);
         }
         
         else if (e.getSource().equals(startView.HatButton)){
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/hat.png"));
-            GameCharacter character = new GameCharacter(EnumCharacter.Hat, appereance);
+            ImageIcon inGameappereance = new ImageIcon(getClass().getResource("/Images/InGameHat.png"));
+            GameCharacter character = new GameCharacter(EnumCharacter.Hat,appereance,inGameappereance );
             user.setCharacter(character);
         }
         
         else if (e.getSource().equals(startView.IronButton)){
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/iron.png"));
-            GameCharacter character = new GameCharacter(EnumCharacter.Iron, appereance);
+            ImageIcon inGameappereance = new ImageIcon(getClass().getResource("/Images/InGameIron.png"));
+            GameCharacter character = new GameCharacter(EnumCharacter.Iron,appereance,inGameappereance );
             user.setCharacter(character);
         }
         
         else if (e.getSource().equals(startView.PenguinButton)){
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/penguin.png"));
-            GameCharacter character = new GameCharacter(EnumCharacter.Penguin, appereance);
+            ImageIcon inGameappereance = new ImageIcon(getClass().getResource("/Images/InGamePenguin.png"));
+            GameCharacter character = new GameCharacter(EnumCharacter.Penguin,appereance,inGameappereance );
             user.setCharacter(character);
         }
         
         else if (e.getSource().equals(startView.ShoeButton)){
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/shoe.png"));
-            GameCharacter character = new GameCharacter(EnumCharacter.Shoe, appereance);
+            ImageIcon inGameappereance = new ImageIcon(getClass().getResource("/Images/InGameShoe.png"));
+            GameCharacter character = new GameCharacter(EnumCharacter.Shoe,appereance,inGameappereance );
             user.setCharacter(character);
         }
         
         else if (e.getSource().equals(startView.ThimbleButton)){
             ImageIcon appereance = new ImageIcon(getClass().getResource("/Images/thimble.png"));
-            GameCharacter character = new GameCharacter(EnumCharacter.Thimble, appereance);
+            ImageIcon inGameappereance = new ImageIcon(getClass().getResource("/Images/InGameThimble.png"));
+            GameCharacter character = new GameCharacter(EnumCharacter.Thimble,appereance,inGameappereance );
             user.setCharacter(character);
         }
         

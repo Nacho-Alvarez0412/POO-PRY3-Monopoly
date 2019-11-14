@@ -28,8 +28,8 @@ public class Property extends Card implements Serializable{
     
     
     
-    public Property(Color color,String name,int rent,int buildingPrice,int mortagePrice,int price ) {
-        super(Property);
+    public Property(int x,int y,Color color,String name,int rent,int buildingPrice,int mortagePrice,int price ) {
+        super(Property,x,y);
         this.color = color;
         this.name = name;
         this.rent = rent;
@@ -105,6 +105,12 @@ public class Property extends Card implements Serializable{
 
     public void setMortgaged(boolean mortgaged) {
         this.mortgaged = mortgaged;
+    }
+    
+    public int getRentPrice(){
+        int extra = 10*houses;
+        
+        return rent+extra;
     }
     
     

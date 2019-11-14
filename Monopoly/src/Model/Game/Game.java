@@ -21,14 +21,27 @@ public class Game extends Thread{
     Server server;
     boolean victory;
     boolean userTurn;
-    ArrayList<Card> board;
-    ArrayList<Property> properties;
-    ArrayList<Wildcard> fortuneDeck;
-    ArrayList<Wildcard> communityChestDeck;
+    public ArrayList<Card> board;
+    public ArrayList<Property> properties;
+    public ArrayList<Wildcard> fortuneDeck;
+    public ArrayList<Wildcard> communityChestDeck;
 
     public ArrayList<Property> getProperties() {
         return properties;
     }
+
+    public ArrayList<User> getPlayers() {
+        return players;
+    }
+    
+    public User findUser(int id){
+        for(User player : players){
+            if(player.id == id)
+                return player;
+        }
+        return null;
+    }
+    
     
     public Game(ArrayList<User> players,Server server){
         this.players = players;
@@ -57,15 +70,22 @@ public class Game extends Thread{
             turn = 0;
     }
     
-    void movePlayer(User user){
-        while(user.roll != 0){
-            user.index++;
-            if(user.index>= board.size())
-                user.index = 0;
-        }
+    public void movePlayer(int index){
         
+        User user = findUser(index);
+        
+       while(user.roll != 0){
+            user.index++;
+            user.roll--;
+            if(user.index>= board.size()){
+                user.index = 0;
+                user.money += 200;
+                user.lap++;
+            }
+        }
+       
     }
-    
+
     public void run(){
         while(!victory){
             server.enviarPaquete(new TurnPackage(players.get(turn).name));

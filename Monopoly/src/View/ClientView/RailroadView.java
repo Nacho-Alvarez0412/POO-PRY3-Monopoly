@@ -190,7 +190,7 @@ public class RailroadView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RailroadView(new Property(Color.BLACK,"Reading Railroad",25,-1,100,200)).setVisible(true);
+                new RailroadView(new Property(0,0,Color.BLACK,"Reading Railroad",25,-1,100,200)).setVisible(true);
             }
         });
     }

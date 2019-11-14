@@ -6,6 +6,8 @@
 package Model.Client;
 
 import Model.Game.Property;
+import Model.Game.User;
+import Model.Packages.BuyRequestPackage;
 import Model.Packages.ChatPackage;
 import Model.Packages.DicesPackage;
 import Model.Packages.TurnPackage;
@@ -32,18 +34,32 @@ class GameController  implements ActionListener {
     Client client;
     int userIndex;
     ArrayList<Property> properties;
+    ArrayList<User> players;
     
-    public GameController(Client client, ArrayList<Property> properties){
+    public GameController(Client client, ArrayList<Property> properties,ArrayList<User> players){
         this.client = client;
         view = new GameView();
-        initWindow();
         view.setVisible(true);
-        updateProperties();
         userIndex = 0;
         this.properties = properties;
+        this.players = players;
+        initWindow();
+        updateProperties();
+    }
+    
+    public User findUser(int id){
+        for(User player : players){
+            if(player.id == id)
+                return player;
+        }
+        return null;
     }
     
     private void initWindow() {
+        //User Labels
+        setIcons();
+        
+        
         //User Buttons
         view.MediterraneanButton.addActionListener(this);
         view.BalticButton.addActionListener(this);
@@ -133,6 +149,41 @@ class GameController  implements ActionListener {
     
     private void getUserInfo() throws IOException{
         client.enviarPaquete(new UserInfoRequestPackage(userIndex));
+    }
+    
+    
+    private void setIcons() {
+        for(User player : players){
+            if(view.Player1IconLabel.getIcon() == null){
+                view.Player1IconLabel.setIcon(player.character.getInGameCharacter());
+                player.inGameAppereance = view.Player1IconLabel;
+            }
+            
+            else if(view.Player2IconLabel.getIcon() == null){
+                view.Player2IconLabel.setIcon(player.character.getInGameCharacter());
+                player.inGameAppereance = view.Player2IconLabel;
+            }
+            
+            else if(view.Player3IconLabel.getIcon() == null){
+                view.Player3IconLabel.setIcon(player.character.getInGameCharacter());
+                player.inGameAppereance = view.Player3IconLabel;
+            }
+            
+            else if(view.Player4IconLabel.getIcon() == null){
+                view.Player4IconLabel.setIcon(player.character.getInGameCharacter());
+                player.inGameAppereance = view.Player4IconLabel;
+            }
+            
+            else if(view.Player5IconLabel.getIcon() == null){
+                view.Player5IconLabel.setIcon(player.character.getInGameCharacter());
+                player.inGameAppereance = view.Player5IconLabel;
+            }
+            
+            else if(view.Player6IconLabel.getIcon() == null){
+                view.Player6IconLabel.setIcon(player.character.getInGameCharacter());
+                player.inGameAppereance = view.Player6IconLabel;
+            }
+        }
     }
 
     private void updateProperties() {
@@ -488,6 +539,14 @@ class GameController  implements ActionListener {
             }
         }
         
+        if(e.getSource().equals(view.BuyButton)){
+            try {
+                client.enviarPaquete(new BuyRequestPackage(client.user.index));
+            } catch (IOException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         if (e.getSource().equals(view.MediterraneanButton) || e.getSource().equals(view.MediterraneanXButton)){
             new PropertyView(searchProperty("Mediterranean Avenue")).setVisible(true);
         }
@@ -604,5 +663,14 @@ class GameController  implements ActionListener {
         
         
         
+    }
+
+    void paintPlayer(User player,int x, int y) {
+        player.inGameAppereance.setLocation(x,y);
+    }
+
+    void updateUserInfo() {
+        view.UserMoneyLabel.setText(String.valueOf(client.user.money));
+        updateProperties();
     }
 }

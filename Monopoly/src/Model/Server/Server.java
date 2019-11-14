@@ -162,7 +162,7 @@ public class Server implements ActionListener {
             if(!areEquals()){
                 initGame();
                 view.ServerLogTextArea.append("\nStarting game...");
-                StartSignalPackage startSignal = new StartSignalPackage(game.getProperties());
+                StartSignalPackage startSignal = new StartSignalPackage(game.getProperties(),game.getPlayers());
                 enviarPaquete(startSignal);
                 
                 gameState = true;

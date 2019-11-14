@@ -260,7 +260,7 @@ public class PropertyView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PropertyView(new Property(Color.PINK,"St. Charles Place",10,100,70,140)).setVisible(true);
+                new PropertyView(new Property(0,0,Color.PINK,"St. Charles Place",10,100,70,140)).setVisible(true);
             }
         });
     }

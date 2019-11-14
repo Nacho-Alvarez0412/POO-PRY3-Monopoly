@@ -6,17 +6,13 @@
 package Model.Client;
 
 import Model.Game.User;
-import Model.Packages.ChatPackage;
-import Model.Packages.Package;
-import Model.Packages.StartSignalPackage;
-import Model.Packages.TurnPackage;
-import Model.Packages.UserInfoRequestPackage;
-import Model.Packages.UserRequestPackage;
+import Model.Packages.*;
 import View.ClientView.RollDiceWindow;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,7 +32,7 @@ public class ServerListener extends Thread{
         try{
             while(true){
                 ObjectInputStream in = new ObjectInputStream(this.client.socket.getInputStream());
-                Package packet = (Package) in.readObject();
+                Model.Packages.Package packet = (Model.Packages.Package) in.readObject();
                 
                 switch (packet.type){
                     
@@ -76,7 +72,7 @@ public class ServerListener extends Thread{
                         }
                         client.startView.setVisible(false);
                         client.startView.dispose();
-                        client.gameController = new GameController(client,startPackage.properties);
+                        client.gameController = new GameController(client,startPackage.properties,startPackage.players);
                         break;
                         
                     case "Turn":
@@ -98,11 +94,43 @@ public class ServerListener extends Thread{
                         client.gameController.view.PlayerXMoney.setText("$ "+user.money);
                         client.gameController.view.PlayerXIconLabel.setIcon(user.character.getAppereance());
                         client.gameController.printXProperties(user.properties);
+                        break;
                         
+                    case "UserMovement":
+                        UserMovementPackage userMovement = (UserMovementPackage) packet;
+                        User player = client.gameController.findUser(userMovement.id);
+                        player.index = userMovement.userIndex;
+                        client.gameController.paintPlayer(player,userMovement.x,userMovement.y);
+                        break;
                         
+                    case "UserUpdate":
+                        UpdateUserPackage newUserInfo = (UpdateUserPackage) packet;
+                        client.user = newUserInfo.user;
+                        client.gameController.updateUserInfo();
+                        break;
                         
+                    case "PropertiesUpdate":
+                        PropertiesUpdatePackage newPropertiesInfo = (PropertiesUpdatePackage) packet;
+                        client.gameController.properties = newPropertiesInfo.properties;
+                        break;
+                    
+                    case "BuyRequest":
+                        BuyRequestPackage terrainRequest = (BuyRequestPackage) packet;
+                         
+                        if(terrainRequest.accepetance)
+                            JOptionPane.showMessageDialog(client.gameController.view, "Your empire is growing! New terrain obtained");
+                        
+                        else
+                            JOptionPane.showMessageDialog(client.gameController.view, "Trouble! This terrain already posses an owner or you're in financial danger!!");
                         
                         break;
+                        
+                    case "RentSignal":
+                        RentSignalPackage rentPackage = (RentSignalPackage) packet;
+                        JOptionPane.showMessageDialog(client.gameController.view, "Whoops! Seems you fell in an owned property. Pay $"+rentPackage.rent);
+                        break;
+                        
+                        
 
                 }
             }

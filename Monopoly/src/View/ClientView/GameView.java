@@ -160,6 +160,12 @@ public class GameView extends javax.swing.JFrame {
         UnmortgageButton = new javax.swing.JButton();
         TradeButton = new javax.swing.JButton();
         BuyButton = new javax.swing.JButton();
+        Player1IconLabel = new javax.swing.JLabel();
+        Player2IconLabel = new javax.swing.JLabel();
+        Player3IconLabel = new javax.swing.JLabel();
+        Player4IconLabel = new javax.swing.JLabel();
+        Player5IconLabel = new javax.swing.JLabel();
+        Player6IconLabel = new javax.swing.JLabel();
         BoardLabel = new javax.swing.JLabel();
         UserInfoPanel = new javax.swing.JPanel();
         UserIconLabel = new javax.swing.JLabel();
@@ -253,6 +259,11 @@ public class GameView extends javax.swing.JFrame {
 
         BuildButton.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         BuildButton.setText("BUILD");
+        BuildButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuildButtonActionPerformed(evt);
+            }
+        });
         ButtonsPanel.add(BuildButton);
         BuildButton.setBounds(200, 10, 170, 50);
 
@@ -283,6 +294,18 @@ public class GameView extends javax.swing.JFrame {
 
         infoPanel.add(ButtonsPanel);
         ButtonsPanel.setBounds(0, 830, 1400, 80);
+        infoPanel.add(Player1IconLabel);
+        Player1IconLabel.setBounds(740, 750, 50, 50);
+        infoPanel.add(Player2IconLabel);
+        Player2IconLabel.setBounds(730, 740, 50, 50);
+        infoPanel.add(Player3IconLabel);
+        Player3IconLabel.setBounds(730, 740, 50, 50);
+        infoPanel.add(Player4IconLabel);
+        Player4IconLabel.setBounds(730, 740, 50, 50);
+        infoPanel.add(Player5IconLabel);
+        Player5IconLabel.setBounds(730, 740, 50, 50);
+        infoPanel.add(Player6IconLabel);
+        Player6IconLabel.setBounds(730, 740, 50, 50);
 
         BoardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MonopolyBoard.jpg"))); // NOI18N
         BoardLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -725,6 +748,10 @@ public class GameView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ChatTextFieldKeyPressed
 
+    private void BuildButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuildButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuildButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -813,6 +840,12 @@ public class GameView extends javax.swing.JFrame {
     public javax.swing.JButton PennsylvaniaTrainXButton;
     public javax.swing.JButton PennsylvaniaXButton;
     private javax.swing.JPanel PlayeXInfoPanel;
+    public javax.swing.JLabel Player1IconLabel;
+    public javax.swing.JLabel Player2IconLabel;
+    public javax.swing.JLabel Player3IconLabel;
+    public javax.swing.JLabel Player4IconLabel;
+    public javax.swing.JLabel Player5IconLabel;
+    public javax.swing.JLabel Player6IconLabel;
     public javax.swing.JLabel PlayerXIconLabel;
     public javax.swing.JLabel PlayerXMoney;
     public javax.swing.JLabel PlayerXName;

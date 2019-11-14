@@ -14,8 +14,8 @@ import static Model.Game.EnumCardType.*;
 public class SpecialCard extends Card{
     EnumSpecialType id;
     
-    public SpecialCard(EnumSpecialType id) {
-        super(Special);
+    public SpecialCard(int x,int y,EnumSpecialType id) {
+        super(Special,x,y);
         this.id = id;
     }
 

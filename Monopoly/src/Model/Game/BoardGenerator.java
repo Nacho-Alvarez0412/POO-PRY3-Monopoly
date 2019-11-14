@@ -27,79 +27,80 @@ public final class BoardGenerator {
         specialCards = new ArrayList<>();
         communityChest = new ArrayList<>();
         
-        generateBlueProperties();
         generateBrownProperties();
-        generateCommunityChestCards();
-        generateFortuneCards();
-        generateGreenProperties();
         generateLightBlueProperties();
-        generateOrangeProperties();
         generatePinkProperties();
-        generateRailRoads();
+        generateOrangeProperties();
         generateRedProperties();
-        generateServices();
-        generateSpecialCards();
         generateYellowProperties();
+        generateGreenProperties();
+        generateBlueProperties();
+        generateRailRoads();
+        generateServices();
+        
+        generateFortuneCards();
+        generateCommunityChestCards();
+        generateSpecialCards();
         
         generateBoard();
     }
     
     public void generateBrownProperties(){
-        properties.add(new Property(Color.WHITE,"Mediterranean Avenue",2,50,20,60));
-        properties.add(new Property(Color.WHITE,"Baltic Avenue",4,50,30,60));
+        properties.add(new Property(650,740,Color.WHITE,"Mediterranean Avenue",2,50,20,60));
+        properties.add(new Property(520,740,Color.WHITE,"Baltic Avenue",4,50,30,60));
     }
     
     public void generateLightBlueProperties(){
-        properties.add(new Property(Color.CYAN,"Oriental Avenue",6,50,50,100));
-        properties.add(new Property(Color.CYAN,"Vermont Avenue",6,50,50,100));
-        properties.add(new Property(Color.CYAN,"Connecticut Avenue",8,50,60,120));
+        properties.add(new Property(320,740,Color.CYAN,"Oriental Avenue",6,50,50,100));
+        properties.add(new Property(190,740,Color.CYAN,"Vermont Avenue",6,50,50,100));
+        properties.add(new Property(120,740,Color.CYAN,"Connecticut Avenue",8,50,60,120));
     }
     
     public void generatePinkProperties(){
-        properties.add(new Property(Color.PINK,"St. Charles Place",10,100,70,140));
-        properties.add(new Property(Color.PINK,"States Avenue",10,100,70,140));
-        properties.add(new Property(Color.PINK,"Virginia Avenue",12,100,80,160));
+        properties.add(new Property(30,650,Color.PINK,"St. Charles Place",10,100,70,140));
+        properties.add(new Property(30,520,Color.PINK,"States Avenue",10,100,70,140));
+        properties.add(new Property(30,460,Color.PINK,"Virginia Avenue",12,100,80,160));
     }
     
     public void generateOrangeProperties(){
-        properties.add(new Property(Color.ORANGE,"St. James Place",14,100,90,180));
-        properties.add(new Property(Color.ORANGE,"Tenessee Avenue",14,100,90,180));
-        properties.add(new Property(Color.ORANGE,"New York Avenue",16,100,100,200));
+        properties.add(new Property(30,320,Color.ORANGE,"St. James Place",14,100,90,180));
+        properties.add(new Property(30,190,Color.ORANGE,"Tenessee Avenue",14,100,90,180));
+        properties.add(new Property(30,130,Color.ORANGE,"New York Avenue",16,100,100,200));
     }
     
     public void generateRedProperties(){
-        properties.add(new Property(Color.RED,"Kentucky Avenue",18,150,110,220));
-        properties.add(new Property(Color.RED,"Indiana Avenue",18,150,110,220));
-        properties.add(new Property(Color.RED,"Illinois Avenue",20,150,120,240));
+        properties.add(new Property(120,30,Color.RED,"Kentucky Avenue",18,150,110,220));
+        properties.add(new Property(260,30,Color.RED,"Indiana Avenue",18,150,110,220));
+        properties.add(new Property(320,30,Color.RED,"Illinois Avenue",20,150,120,240));
     }
     
     public void generateYellowProperties(){
-        properties.add(new Property(Color.YELLOW,"Atlantic Avenue",22,150,130,260));
-        properties.add(new Property(Color.YELLOW,"Ventor Avenue",22,150,130,260));
-        properties.add(new Property(Color.YELLOW,"Marvin Gardens",24,150,140,280));
+        properties.add(new Property(450,30,Color.YELLOW,"Atlantic Avenue",22,150,130,260));
+        properties.add(new Property(520,30,Color.YELLOW,"Ventor Avenue",22,150,130,260));
+        properties.add(new Property(650,30,Color.YELLOW,"Marvin Gardens",24,150,140,280));
     }
     
     public void generateGreenProperties(){
-        properties.add(new Property(Color.GREEN,"Pacific Avenue",26,200,150,300));
-        properties.add(new Property(Color.GREEN,"North Carolina Avenue",26,200,150,300));
-        properties.add(new Property(Color.GREEN,"Pennsylvania Avenue",28,200,160,320));
+        properties.add(new Property(740,130,Color.GREEN,"Pacific Avenue",26,200,150,300));
+        properties.add(new Property(740,190,Color.GREEN,"North Carolina Avenue",26,200,150,300));
+        properties.add(new Property(740,330,Color.GREEN,"Pennsylvania Avenue",28,200,160,320));
     }
     
     public void generateBlueProperties(){
-        properties.add(new Property(Color.BLUE,"Park Place",35,200,175,350));
-        properties.add(new Property(Color.BLUE,"Boardwalk",50,200,200,400));
+        properties.add(new Property(740,520,Color.BLUE,"Park Place",35,200,175,350));
+        properties.add(new Property(740,650,Color.BLUE,"Boardwalk",50,200,200,400));
     }
     
     public void generateRailRoads(){
-        properties.add(new Property(Color.BLACK,"Reading Railroad",25,-1,100,200));
-        properties.add(new Property(Color.BLACK,"Pennsylvania Railroad",25,-1,100,200));
-        properties.add(new Property(Color.BLACK,"B. & O. Railroad",25,-1,100,200));
-        properties.add(new Property(Color.BLACK,"Short Line",25,-1,100,200));
+        properties.add(new Property(390,740,Color.BLACK,"Reading Railroad",25,-1,100,200)); //22
+        properties.add(new Property(40,390,Color.BLACK,"Pennsylvania Railroad",25,-1,100,200));
+        properties.add(new Property(390,40,Color.BLACK,"B. & O. Railroad",25,-1,100,200));
+        properties.add(new Property(750,390,Color.BLACK,"Short Line",25,-1,100,200));
     }
     
     public void generateServices(){
-        properties.add(new Property(Color.LIGHT_GRAY,"Electric Company",4,-1,75,150));
-        properties.add(new Property(Color.LIGHT_GRAY,"Water Works",4,-1,75,150));
+        properties.add(new Property(30,580,Color.LIGHT_GRAY,"Electric Company",4,-1,75,150));
+        properties.add(new Property(580,40,Color.LIGHT_GRAY,"Water Works",4,-1,75,150));
     }
     
     public void generateFortuneCards(){
@@ -141,20 +142,26 @@ public final class BoardGenerator {
     }
     
     public void generateSpecialCards(){
-        specialCards.add(new SpecialCard(EnumSpecialType.Go));
-        specialCards.add(new SpecialCard(EnumSpecialType.IncomeTax));
-        specialCards.add(new SpecialCard(EnumSpecialType.Jail));
-        specialCards.add(new SpecialCard(EnumSpecialType.ParkZone));
-        specialCards.add(new SpecialCard(EnumSpecialType.ToJail));
-        specialCards.add(new SpecialCard(EnumSpecialType.LuxuryTax));
-        specialCards.add(new SpecialCard(EnumSpecialType.Chance));
-        specialCards.add(new SpecialCard(EnumSpecialType.CommunityChest));
+        specialCards.add(new SpecialCard(730,740,EnumSpecialType.Go));
+        specialCards.add(new SpecialCard(450,730,EnumSpecialType.IncomeTax));
+        specialCards.add(new SpecialCard(50,730,EnumSpecialType.Jail));
+        specialCards.add(new SpecialCard(40,40,EnumSpecialType.ParkZone));
+        specialCards.add(new SpecialCard(730,40,EnumSpecialType.ToJail));
+        specialCards.add(new SpecialCard(740,590,EnumSpecialType.LuxuryTax));
+        
+        specialCards.add(new SpecialCard(250,740,EnumSpecialType.Chance)); //6
+        specialCards.add(new SpecialCard(190,30,EnumSpecialType.Chance));
+        specialCards.add(new SpecialCard(740,460,EnumSpecialType.Chance));
+        
+        specialCards.add(new SpecialCard(580,730,EnumSpecialType.CommunityChest)); //9
+        specialCards.add(new SpecialCard(30,260,EnumSpecialType.CommunityChest));
+        specialCards.add(new SpecialCard(740,260,EnumSpecialType.CommunityChest));
     }
 
     private void generateBoard() {
         board.add(specialCards.get(0));
         board.add(properties.get(0));
-        board.add(specialCards.get(7));
+        board.add(specialCards.get(9));
         board.add(properties.get(1));
         board.add(specialCards.get(1));
         board.add(properties.get(22));
@@ -169,12 +176,12 @@ public final class BoardGenerator {
         board.add(properties.get(7));
         board.add(properties.get(23));
         board.add(properties.get(8));
-        board.add(specialCards.get(7));
+        board.add(specialCards.get(10));
         board.add(properties.get(9));
         board.add(properties.get(10));
         board.add(specialCards.get(3));
         board.add(properties.get(11));
-        board.add(specialCards.get(6));
+        board.add(specialCards.get(7));
         board.add(properties.get(12));
         board.add(properties.get(13));
         board.add(properties.get(24));
@@ -185,10 +192,10 @@ public final class BoardGenerator {
         board.add(specialCards.get(4));
         board.add(properties.get(17));
         board.add(properties.get(18));
-        board.add(specialCards.get(7));
+        board.add(specialCards.get(11));
         board.add(properties.get(19));
         board.add(properties.get(25));
-        board.add(specialCards.get(6));
+        board.add(specialCards.get(8));
         board.add(properties.get(20));
         board.add(specialCards.get(5));
         board.add(properties.get(21));

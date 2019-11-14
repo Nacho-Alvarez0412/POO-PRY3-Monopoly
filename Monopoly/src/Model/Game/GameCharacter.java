@@ -18,11 +18,13 @@ public class GameCharacter implements Serializable  {
     //Atributos
     EnumCharacter character;
     ImageIcon appereance;
+    ImageIcon inGameAppereance;
     
     //Metodos
-    public GameCharacter(EnumCharacter character,ImageIcon appereance){
+    public GameCharacter(EnumCharacter character,ImageIcon appereance,ImageIcon inGameAppereance){
         this.character = character;
         this.appereance = appereance;
+        this.inGameAppereance = inGameAppereance;
     }
 
     public EnumCharacter getCharacter() {
@@ -31,6 +33,10 @@ public class GameCharacter implements Serializable  {
 
     public Icon getAppereance() {
         return appereance;
+    }
+
+    public Icon getInGameCharacter() {
+        return inGameAppereance;
     }
     
 }

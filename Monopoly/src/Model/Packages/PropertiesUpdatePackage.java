@@ -6,20 +6,20 @@
 package Model.Packages;
 
 import Model.Game.Property;
-import Model.Game.User;
 import java.util.ArrayList;
 
 /**
  *
  * @author nacho
  */
-public class StartSignalPackage extends Package {
+public class PropertiesUpdatePackage extends Package {
+
     public ArrayList<Property> properties;
-    public ArrayList<User> players;
-    public StartSignalPackage(ArrayList<Property> properties,ArrayList<User>players) {
-        super("StartSignal");
+    
+    public PropertiesUpdatePackage(ArrayList<Property> properties) {
+        super("PropertiesUpdate");
         this.properties = properties;
-        this.players = players;
     }
+    
     
 }

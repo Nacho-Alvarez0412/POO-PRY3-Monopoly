@@ -5,6 +5,9 @@
  */
 package Model.Server;
 
+import Model.Game.Card;
+import Model.Game.EnumCardType;
+import Model.Game.Property;
 import Model.Game.User;
 import Model.Packages.*;
 import java.io.IOException;
@@ -68,6 +71,23 @@ public class ClientListener extends Thread{
                         if(server.gameState){
                             String Servermessage ="Server: " + server.findUser(id).name + " rolled a "+userRoll.value;
                             server.enviarPaquete(new ChatPackage(Servermessage));
+                            server.findUser(id).roll = userRoll.value;
+                            server.game.movePlayer(id);
+                            User player = server.findUser(id);
+                            Card property = server.game.board.get(player.index);                            
+                            
+                            server.enviarPaquete(new UserMovementPackage(player.index, id,property.getX(),property.getY()) );
+                            
+                            if(property.getType() == EnumCardType.Property){
+                                Property terrain = (Property) property;
+                                if(terrain.getOwner() != null){
+                                    player.money -= terrain.getRentPrice();
+                                    terrain.getOwner().money += terrain.getRentPrice();
+                                    server.enviarPaqueteA(new RentSignalPackage(terrain.getRentPrice()), socket);
+                                }
+                            }
+                            server.enviarPaqueteA(new UpdateUserPackage(player), socket);
+                            server.enviarPaquete(new PropertiesUpdatePackage(server.game.properties));
                         }
                         else{
                             User player = server.findUser(id);
@@ -100,6 +120,30 @@ public class ClientListener extends Thread{
                         
                         server.enviarPaqueteA(packet, socket);
                         break;
+                        
+                    case "BuyRequest":
+                        
+                        BuyRequestPackage terrainRequest = (BuyRequestPackage) packet;
+                        User player = server.findUser(id);
+                        Property terrain = (Property) server.game.board.get(terrainRequest.boardIndex);
+                        
+                        if(terrain.getOwner() != null || terrain.getPrice() > player.money){
+                            terrainRequest.accepetance = false;
+                        }
+                        else{
+                            terrainRequest.accepetance = true;
+                            player.money -= terrain.getPrice();
+                            terrain.setOwner(player);
+                            player.addTerrain(terrain);
+                            
+                        }
+                        server.enviarPaqueteA(packet, socket);
+                        server.enviarPaqueteA(new UpdateUserPackage(player), socket);
+                        server.enviarPaquete(new PropertiesUpdatePackage(server.game.properties));
+                        
+                        break;
+                        
+                        
                 }
             } catch(IOException | ClassNotFoundException e) { 
                  System.out.println(e); 

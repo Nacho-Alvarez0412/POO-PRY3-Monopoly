@@ -11,14 +11,26 @@ import java.io.Serializable;
  *
  * @author nacho
  */
-public class Card implements Serializable {
+public abstract class Card implements Serializable {
     EnumCardType type;
+    int x;
+    int y;
     
-    Card(EnumCardType type){
+    Card(EnumCardType type,int x,int y){
         this.type = type;
+        this.x = x;
+        this.y = y;
     }
 
     public EnumCardType getType() {
         return type;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

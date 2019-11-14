@@ -17,7 +17,7 @@ public class Wildcard extends Card {
     boolean wildcardType; // true = fortune -- false = communityChest
     
     public Wildcard(int id,String info,boolean type) {
-        super(Wildcard);
+        super(Wildcard,0,0);
         this.info = info;
         this.wildcardType = type;
     }

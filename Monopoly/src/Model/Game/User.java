@@ -8,6 +8,7 @@ package Model.Game;
 import java.awt.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 
 /**
  *
@@ -23,6 +24,8 @@ public class User implements Serializable {
     public int roll;
     public int money;
     public int index;
+    public JLabel inGameAppereance;
+    int lap;
     
     
     //Metodos
@@ -35,7 +38,11 @@ public class User implements Serializable {
         dices.add(new Dice());
         dices.add(new Dice());
         properties = new ArrayList<>();
-        properties.add(new Property(Color.WHITE,"Mediterranean Avenue",2,50,20,60));
+        index = 0;
+    }
+
+    public void setInGameAppereance(JLabel inGameAppereance) {
+        this.inGameAppereance = inGameAppereance;
     }
 
     public String getName() {
@@ -77,5 +84,9 @@ public class User implements Serializable {
                 return true;
         }
         return false;
+    }
+
+    public void addTerrain(Property terrain) {
+        properties.add(terrain);
     }
 }
