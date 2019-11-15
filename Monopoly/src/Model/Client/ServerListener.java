@@ -5,7 +5,6 @@
  */
 package Model.Client;
 
-import Model.Game.Property;
 import Model.Game.User;
 import Model.Packages.*;
 import View.ClientView.RollDiceWindow;
@@ -158,7 +157,32 @@ public class ServerListener extends Thread{
                         else
                             JOptionPane.showMessageDialog(client.gameController.buildingView, "Whoops! Seems you dont have the requirements for building!");
                         
-
+                        break;
+                        
+                    case "TradeRequest":
+                        TradeRequestPackage tradeRequest = (TradeRequestPackage) packet;
+                        
+                        if(tradeRequest.waiting){
+                            client.gameController.tradeRequestView.MessageLabel.setText(tradeRequest.message);
+                            client.gameController.tradeRequestView.setVisible(true);
+                            client.gameController.tradeRequest = tradeRequest;
+                        }
+                        
+                        else{
+                            if(tradeRequest.accepted)
+                                JOptionPane.showMessageDialog(client.gameController.view, "Hurray! Both parties accepted to trade!");
+                            else
+                                JOptionPane.showMessageDialog(client.gameController.view, "Seems like your offer wasnt good enough!");
+                        }
+                        break;
+                        
+                    case "MortgageCheck":
+                        MortgagePackage mortgagePackage = (MortgagePackage) packet;
+                        
+                        if(mortgagePackage.mortgage)
+                            JOptionPane.showMessageDialog(client.gameController.view, "Your property has been mortgaged successfully");
+                        else
+                            JOptionPane.showMessageDialog(client.gameController.view, "Your property has been unmortgaged successfully");
                 }
             }
         } catch (IOException ex) {

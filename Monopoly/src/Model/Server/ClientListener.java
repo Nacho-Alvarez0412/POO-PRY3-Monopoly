@@ -200,32 +200,76 @@ public class ClientListener extends Thread{
                         Property propertyToConstruct = server.game.findProperty(buildRequest.name);
                         User owner = server.findUser(id);
                         
-                        if(owner.money >= propertyToConstruct.getBuildingPrice()){
-                            buildRequest.accepted = true;
-                            if(propertyToConstruct.getHouses()<4)
-                                propertyToConstruct.addHouses();
+                        if(server.findUser(id).isMonopoly(propertyToConstruct.getColor())){
+                            if(owner.money >= propertyToConstruct.getBuildingPrice()){
+                                buildRequest.accepted = true;
+                                if(propertyToConstruct.getHouses()<4)
+                                    propertyToConstruct.addHouses();
+                                else
+                                    propertyToConstruct.setHotel(true);
+
+                                owner.money -= propertyToConstruct.getBuildingPrice();
+                            }
                             else
-                                propertyToConstruct.setHotel(true);
-                            
-                            owner.money -= propertyToConstruct.getBuildingPrice();
+                                buildRequest.accepted = false;
                         }
-                        
-                        else{
+                        else
                             buildRequest.accepted = false;
-                        }
-                        
-//                        if(server.findUser(id).isMonopoly(propertyToConstruct.getColor())){
-                        
-                            
-                        
-//                        else
-//                            buildRequest.accepted = false;
                         
                         server.enviarPaqueteA(packet, socket);
                         server.enviarPaqueteA(new UpdateUserPackage(server.findUser(id)), socket);
                         server.enviarPaquete(new PropertiesUpdatePackage(server.game.properties));
                         break;
-       
+                        
+                    case "TradeRequest":
+                        TradeRequestPackage tradeRequest = (TradeRequestPackage) packet;
+                        User player1 = server.findUser(tradeRequest.player1);
+                        User player2 = server.findUser(tradeRequest.player2);
+                        Property property1 = server.game.findProperty(tradeRequest.property1);
+                        Property property2 = server.game.findProperty(tradeRequest.property2);
+                        
+                        if(tradeRequest.waiting){
+                            
+                            tradeRequest.message = player1.name + " wants to trade "+ property1.getName()+ " for " + property2.getName();
+                            server.enviarPaqueteA(packet, server.listeners.get(player2.id-1).socket);
+                        }
+                        else{
+                            if(tradeRequest.accepted){
+                                property1.setOwner(player2);
+                                property2.setOwner(player1);
+                                player1.removeProperty(property1.getName());
+                                player2.removeProperty(property2.getName());
+                                player1.addTerrain(property2);
+                                player2.addTerrain(property1);
+                                server.enviarPaquete(new PropertiesUpdatePackage(server.game.properties));
+                                server.enviarPaqueteA(new UpdateUserPackage(player1),server.listeners.get(player1.id-1).socket);
+                                server.enviarPaqueteA(new UpdateUserPackage(player2),server.listeners.get(player2.id-1).socket);
+                            }
+                            server.enviarPaqueteA(packet,server.listeners.get(player1.id-1).socket);
+                        }
+                        
+                        break;
+                        
+                    case "MortgageCheck":
+                        MortgagePackage mortgageRequest = (MortgagePackage) packet;
+                        Property mortgagedProperty = server.game.findProperty(mortgageRequest.propertyName);
+                        User MortgageOwner = server.findUser(id);
+                        
+                        if(mortgagedProperty.isMortgaged()){
+                            MortgageOwner.money -= mortgagedProperty.getMortagePrice() +75;
+                            mortgagedProperty.setMortgaged(false);
+                        }
+                        
+                        else{
+                            MortgageOwner.money += mortgagedProperty.getMortagePrice();
+                            mortgagedProperty.setMortgaged(true);
+                        }
+                        server.enviarPaquete(new PropertiesUpdatePackage(server.game.properties));
+                        server.enviarPaqueteA(new UpdateUserPackage(MortgageOwner),socket);
+                        server.enviarPaqueteA(packet, socket);
+                        
+                        break;
+
                 }
             } catch(IOException | ClassNotFoundException e) { 
                  System.out.println(e); 

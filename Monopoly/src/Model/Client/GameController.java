@@ -7,20 +7,8 @@ package Model.Client;
 
 import Model.Game.Property;
 import Model.Game.User;
-import Model.Packages.BuildRequestPackage;
-import Model.Packages.BuyRequestPackage;
-import Model.Packages.ChatPackage;
-import Model.Packages.DicesPackage;
-import Model.Packages.SellRequestPackage;
-import Model.Packages.TurnPackage;
-import Model.Packages.UserInfoRequestPackage;
-import View.ClientView.BuildingView;
-import View.ClientView.GameView;
-import View.ClientView.PropertyView;
-import View.ClientView.RailroadView;
-import View.ClientView.SellRequestView;
-import View.ClientView.SellView;
-import View.ClientView.ServiceView;
+import Model.Packages.*;
+import View.ClientView.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -47,6 +35,10 @@ class GameController  implements ActionListener {
     SellRequestView sellRequestView;
     SellRequestPackage request;
     BuildingView buildingView;
+    TradeRequestView tradeRequestView;
+    TradeView tradeView;
+    TradeRequestPackage tradeRequest;
+    MortgageView mortgageView;
     
     public GameController(Client client, ArrayList<Property> properties,ArrayList<User> players){
         this.client = client;
@@ -57,9 +49,12 @@ class GameController  implements ActionListener {
         userIndex = 0;
         this.properties = properties;
         this.players = players;
-        initWindow();
         updateProperties();
         this.request=null;
+        this.tradeView = new TradeView(new String[]{}, new String[]{}, new String[]{});
+        this.tradeRequestView = new TradeRequestView();
+        this.mortgageView = new MortgageView();
+        initWindow();
     }
     
     public User findUser(int id){
@@ -149,7 +144,6 @@ class GameController  implements ActionListener {
         view.BuildButton.addActionListener(this);
         view.SellButton.addActionListener(this);
         view.MortgageButton.addActionListener(this);
-        view.UnmortgageButton.addActionListener(this);
         view.TradeButton.addActionListener(this);
         view.BuyButton.addActionListener(this);
         
@@ -159,6 +153,15 @@ class GameController  implements ActionListener {
         //Sell Request buttons
         sellRequestView.AcceptButton.addActionListener(this);
         sellRequestView.DeclineButton.addActionListener(this);
+        
+        //TradeRequest buttons
+        tradeView.jButton1.addActionListener(this);
+        tradeRequestView.AcceptButton.addActionListener(this);
+        tradeRequestView.DeclineButton.addActionListener(this);
+        
+        //MortgageWindow buttons
+        mortgageView.MortgageButton.addActionListener(this);
+        mortgageView.Unmortgage.addActionListener(this);
         
         //Chat TextField
         view.ChatTextField.addActionListener(this);
@@ -366,8 +369,7 @@ class GameController  implements ActionListener {
     }
 
     void printXProperties(ArrayList<Property> properties) {
-        if(properties.isEmpty())
-            clearXButtons();
+        clearXButtons();
         for(Property terrain : properties){
             
             switch(terrain.getName()){
@@ -553,6 +555,35 @@ class GameController  implements ActionListener {
             }
         }
         
+        else if (e.getSource().equals(view.MortgageButton)){
+            mortgageView.setPropertiesComboBox(getPropertyName());
+            mortgageView.setVisible(true);
+        }
+        
+        else if (e.getSource().equals(mortgageView.MortgageButton)){
+            MortgagePackage packet = new MortgagePackage((String) mortgageView.PropertiesComboBox.getSelectedItem(),true);
+            try {
+                client.enviarPaquete(packet);
+            } catch (IOException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        else if (e.getSource().equals(mortgageView.Unmortgage)){
+            MortgagePackage packet = new MortgagePackage((String) mortgageView.PropertiesComboBox.getSelectedItem(),false);
+            try {
+                client.enviarPaquete(packet);
+            } catch (IOException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        else if (e.getSource().equals(view.MortgageButton)){
+            mortgageView.setPropertiesComboBox(getPropertyName());
+            mortgageView.setVisible(true);
+  
+        }
+        
         else if (e.getSource().equals(view.EndTurnButton)){
             view.EndTurnButton.setEnabled(false);
             view.RollButton.setEnabled(false);
@@ -717,6 +748,48 @@ class GameController  implements ActionListener {
             new ServiceView(searchProperty("Water Works")).setVisible(true);
         }
         
+        else if (e.getSource().equals(view.TradeButton)){
+            tradeView.setPlayerPropertyComboBox(getPropertyName());
+            tradeView.setPropertiesComboBox(getPropertiesNames());
+            tradeView.setPlayersComboBox(getPlayerName());
+            tradeView.setVisible(true);
+        }
+        
+         else if (e.getSource().equals(tradeView.jButton1)){
+            TradeRequestPackage request = new TradeRequestPackage(client.user.name, (String) tradeView.PlayersComboBox.getSelectedItem(), (String) tradeView.PlayerPropertyComboBox.getSelectedItem(), (String) tradeView.PropertiesComboBox.getSelectedItem());
+            tradeView.setVisible(false);
+            try {
+                client.enviarPaquete(request);
+            } catch (IOException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
+         
+         else if (e.getSource().equals(tradeRequestView.AcceptButton)){
+            tradeRequest.accepted = true;
+            tradeRequest.waiting = false;
+            
+            try {
+                client.enviarPaquete(tradeRequest);
+            } catch (IOException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
+         
+          else if (e.getSource().equals(tradeRequestView.DeclineButton)){
+            tradeRequest.accepted = false;
+            tradeRequest.waiting = false;
+            
+            try {
+                client.enviarPaquete(tradeRequest);
+            } catch (IOException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+         }
+         
+        
+        
         else if(e.getSource().equals(sellRequestView.AcceptButton)){
             request.accepted = true;
             request.waiting = false;
@@ -784,6 +857,14 @@ class GameController  implements ActionListener {
         view.UserMoneyLabel.setText(String.valueOf(client.user.money));
         clearButtons();
         updateProperties();
+    }
+    
+    private String[] getPropertiesNames() {
+        ArrayList<String> propertiesNames = new ArrayList<>();
+        for(Property property : client.gameController.properties){
+            propertiesNames.add(property.getName());
+        }
+        return propertiesNames.toArray(new String[0]);
     }
 
     private String[] getPropertyName() {

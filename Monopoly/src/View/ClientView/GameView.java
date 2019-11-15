@@ -157,7 +157,6 @@ public class GameView extends javax.swing.JFrame {
         BuildButton = new javax.swing.JButton();
         SellButton = new javax.swing.JButton();
         MortgageButton = new javax.swing.JButton();
-        UnmortgageButton = new javax.swing.JButton();
         TradeButton = new javax.swing.JButton();
         BuyButton = new javax.swing.JButton();
         Player1IconLabel = new javax.swing.JLabel();
@@ -276,11 +275,6 @@ public class GameView extends javax.swing.JFrame {
         MortgageButton.setText("MORTGAGE");
         ButtonsPanel.add(MortgageButton);
         MortgageButton.setBounds(590, 10, 180, 50);
-
-        UnmortgageButton.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        UnmortgageButton.setText("UNMORTGAGE");
-        ButtonsPanel.add(UnmortgageButton);
-        UnmortgageButton.setBounds(790, 10, 180, 50);
 
         TradeButton.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         TradeButton.setText("TRADE");
@@ -861,7 +855,6 @@ public class GameView extends javax.swing.JFrame {
     public javax.swing.JButton TenesseeXButton;
     public javax.swing.JButton TradeButton;
     public javax.swing.JLabel TurnLabel;
-    public javax.swing.JButton UnmortgageButton;
     public javax.swing.JLabel UserIconLabel;
     private javax.swing.JPanel UserInfoPanel;
     public javax.swing.JLabel UserMoneyLabel;
