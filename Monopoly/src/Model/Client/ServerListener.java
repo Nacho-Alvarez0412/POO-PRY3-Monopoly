@@ -130,6 +130,24 @@ public class ServerListener extends Thread{
                         JOptionPane.showMessageDialog(client.gameController.view, "Whoops! Seems you fell in an owned property. Pay $"+rentPackage.rent);
                         break;
                         
+                    case "SellRequest":
+                        SellRequestPackage request = (SellRequestPackage) packet;
+                        
+                        if(!request.waiting){
+                        
+                            if(request.accepted)
+                                JOptionPane.showMessageDialog(client.gameController.sellView, "Your transaction has been processed successfully!");   
+
+                            else
+                                JOptionPane.showMessageDialog(client.gameController.sellView, "Your transaction has been declined... Better luck next time!"); 
+                        }
+                        
+                        else{
+                            client.gameController.request = request;
+                            client.gameController.sellRequestView.MessageLabel.setText(request.message);
+                            client.gameController.sellRequestView.setVisible(true);
+                        }
+                        break;
                         
 
                 }

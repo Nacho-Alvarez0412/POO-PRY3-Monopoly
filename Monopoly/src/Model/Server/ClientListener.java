@@ -143,7 +143,54 @@ public class ClientListener extends Thread{
                         
                         break;
                         
+                    case "SellRequest":
+                        SellRequestPackage sellRequest = (SellRequestPackage) packet;
+                        Property property = server.game.findProperty(sellRequest.property);
+                        User seller = server.findUser(id);
+                        User buyer = server.findUser(sellRequest.buyer);
                         
+                        if(sellRequest.waiting == true){
+                            if(sellRequest.edification){
+                                if(property.getHouses()>0){
+                                    seller.money += property.getBuildingPrice() * property.getHouses();
+                                    property.setHouses(0);
+                                }
+
+                                if(property.isHotel()){
+                                    seller.money += property.getBuildingPrice();
+                                    property.setHotel(false);
+                                }
+                                sellRequest.accepted = true;
+                            }
+
+                            else if(sellRequest.buyer.equals("")){
+                                seller.money += property.getPrice() - 20;
+                                property.setOwner(null);
+                                seller.removeProperty(property.getName());
+                                sellRequest.accepted = true;
+
+                            }
+
+                            else{
+                                sellRequest.setMessage(seller.name + " wants to sell " + property.getName() + " for $" + sellRequest.price);
+                                server.enviarPaqueteA(packet, server.listeners.get(buyer.id-1).socket);
+                            }
+                        }
+                        
+                        else{
+                            if(sellRequest.accepted){
+                                seller.money += sellRequest.price;
+                                buyer.money -= sellRequest.price;
+                                property.setOwner(buyer);
+                                buyer.addTerrain(property);
+                                seller.removeProperty(property.getName());
+                                server.enviarPaqueteA(new UpdateUserPackage(buyer), server.listeners.get(buyer.id-1).socket);
+                            }
+                        }
+                        server.enviarPaqueteA(packet, socket);
+                        server.enviarPaqueteA(new UpdateUserPackage(seller), socket);
+                        server.enviarPaquete(new PropertiesUpdatePackage(server.game.properties));
+       
                 }
             } catch(IOException | ClassNotFoundException e) { 
                  System.out.println(e); 

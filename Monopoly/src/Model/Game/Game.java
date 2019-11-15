@@ -111,4 +111,12 @@ public class Game extends Thread{
         }
         
     }
+
+    public Property findProperty(String name) {
+        for(Property property : properties){
+            if(name.equals(property.getName()))
+                return property;
+        }
+        return null;
+    }
 }

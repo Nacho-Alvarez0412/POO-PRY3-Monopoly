@@ -112,6 +112,10 @@ public class Property extends Card implements Serializable{
         
         return rent+extra;
     }
+
+    public void setHouses(int houses) {
+        this.houses = houses;
+    }
     
     
 }

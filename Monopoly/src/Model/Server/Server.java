@@ -174,4 +174,12 @@ public class Server implements ActionListener {
                 
         }
     }
+
+    User findUser(String buyer) {
+        for(User player : players){
+            if(player.name.equals(buyer))
+                return player;
+        }
+        return null;
+    }
 }

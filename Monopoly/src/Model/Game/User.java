@@ -40,6 +40,17 @@ public class User implements Serializable {
         properties = new ArrayList<>();
         index = 0;
     }
+    
+    public void removeProperty(String name){
+        Property delete = null;
+        for(Property property : properties){
+            if(property.name.equals(name)){
+                delete = property;
+                break;
+            }
+        }
+        properties.remove(delete);
+    }
 
     public void setInGameAppereance(JLabel inGameAppereance) {
         this.inGameAppereance = inGameAppereance;

@@ -32,6 +32,10 @@ public class PropertyView extends javax.swing.JFrame {
         MortgageValueLabel.setText("$ "+property.getMortagePrice());
         HouseValueLabel.setText("$ "+property.getBuildingPrice());
         HotelValueLabel.setText("$ "+property.getBuildingPrice());
+        HousesNumberLabel.setText(String.valueOf(property.getHouses()));
+        
+        if(property.isHotel())
+            IsHotelResponseLabel.setText("YES");
         
         if(property.getOwner() == null)
             OwnerNameLabel.setText("FREE");
@@ -73,6 +77,10 @@ public class PropertyView extends javax.swing.JFrame {
         HotelValueLabel = new javax.swing.JLabel();
         HotelLabel = new javax.swing.JLabel();
         HotelPriceLabel = new javax.swing.JLabel();
+        IsHotelLabel = new javax.swing.JLabel();
+        IsHotelResponseLabel = new javax.swing.JLabel();
+        HousesLabel = new javax.swing.JLabel();
+        HousesNumberLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -221,6 +229,30 @@ public class PropertyView extends javax.swing.JFrame {
         jPanel2.add(HotelPriceLabel);
         HotelPriceLabel.setBounds(220, 310, 90, 40);
 
+        IsHotelLabel.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        IsHotelLabel.setForeground(new java.awt.Color(0, 0, 0));
+        IsHotelLabel.setText("Hotel: ");
+        jPanel2.add(IsHotelLabel);
+        IsHotelLabel.setBounds(30, 490, 50, 30);
+
+        IsHotelResponseLabel.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        IsHotelResponseLabel.setForeground(new java.awt.Color(0, 0, 0));
+        IsHotelResponseLabel.setText("NO");
+        jPanel2.add(IsHotelResponseLabel);
+        IsHotelResponseLabel.setBounds(70, 496, 41, 20);
+
+        HousesLabel.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        HousesLabel.setForeground(new java.awt.Color(0, 0, 0));
+        HousesLabel.setText("Houses: ");
+        jPanel2.add(HousesLabel);
+        HousesLabel.setBounds(260, 490, 70, 30);
+
+        HousesNumberLabel.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+        HousesNumberLabel.setForeground(new java.awt.Color(0, 0, 0));
+        HousesNumberLabel.setText("0");
+        jPanel2.add(HousesNumberLabel);
+        HousesNumberLabel.setBounds(320, 490, 41, 30);
+
         jPanel1.add(jPanel2);
         jPanel2.setBounds(10, 10, 410, 530);
 
@@ -282,6 +314,10 @@ public class PropertyView extends javax.swing.JFrame {
     public javax.swing.JLabel House4PriceLabel;
     public javax.swing.JLabel HouseValueLabel;
     private javax.swing.JLabel HousesCostLabel;
+    private javax.swing.JLabel HousesLabel;
+    public javax.swing.JLabel HousesNumberLabel;
+    private javax.swing.JLabel IsHotelLabel;
+    public javax.swing.JLabel IsHotelResponseLabel;
     private javax.swing.JLabel MortgageLabel;
     public javax.swing.JLabel MortgageValueLabel;
     private javax.swing.JLabel OwnerLabel;
