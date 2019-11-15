@@ -146,7 +146,7 @@ public class ClientListener extends Thread{
                     case "SellRequest":
                         SellRequestPackage sellRequest = (SellRequestPackage) packet;
                         Property property = server.game.findProperty(sellRequest.property);
-                        User seller = server.findUser(id);
+                        User seller = server.findUser(sellRequest.seller);
                         User buyer = server.findUser(sellRequest.buyer);
                         
                         if(sellRequest.waiting == true){
@@ -161,6 +161,8 @@ public class ClientListener extends Thread{
                                     property.setHotel(false);
                                 }
                                 sellRequest.accepted = true;
+                                sellRequest.waiting = false;
+                                server.enviarPaqueteA(packet, socket);
                             }
 
                             else if(sellRequest.buyer.equals("")){
@@ -168,6 +170,8 @@ public class ClientListener extends Thread{
                                 property.setOwner(null);
                                 seller.removeProperty(property.getName());
                                 sellRequest.accepted = true;
+                                sellRequest.waiting = false;
+                                server.enviarPaqueteA(packet, socket);
 
                             }
 
@@ -176,20 +180,51 @@ public class ClientListener extends Thread{
                                 server.enviarPaqueteA(packet, server.listeners.get(buyer.id-1).socket);
                             }
                         }
-                        
                         else{
                             if(sellRequest.accepted){
                                 seller.money += sellRequest.price;
                                 buyer.money -= sellRequest.price;
-                                property.setOwner(buyer);
-                                buyer.addTerrain(property);
                                 seller.removeProperty(property.getName());
-                                server.enviarPaqueteA(new UpdateUserPackage(buyer), server.listeners.get(buyer.id-1).socket);
+                                buyer.addTerrain(property);
+                                property.setOwner(buyer);
+                                server.enviarPaqueteA(new UpdateUserPackage(buyer), server.listeners.get(server.findUser(buyer.name).id-1).socket);
+                                server.enviarPaqueteA(packet, server.listeners.get(server.findUser(seller.name).id-1).socket);
                             }
                         }
-                        server.enviarPaqueteA(packet, socket);
-                        server.enviarPaqueteA(new UpdateUserPackage(seller), socket);
+                        server.enviarPaqueteA(new UpdateUserPackage(seller), server.listeners.get(server.findUser(seller.name).id-1).socket);
                         server.enviarPaquete(new PropertiesUpdatePackage(server.game.properties));
+                        break;
+                        
+                    case "BuildRequest":
+                        BuildRequestPackage buildRequest = (BuildRequestPackage) packet;
+                        Property propertyToConstruct = server.game.findProperty(buildRequest.name);
+                        User owner = server.findUser(id);
+                        
+                        if(owner.money >= propertyToConstruct.getBuildingPrice()){
+                            buildRequest.accepted = true;
+                            if(propertyToConstruct.getHouses()<4)
+                                propertyToConstruct.addHouses();
+                            else
+                                propertyToConstruct.setHotel(true);
+                            
+                            owner.money -= propertyToConstruct.getBuildingPrice();
+                        }
+                        
+                        else{
+                            buildRequest.accepted = false;
+                        }
+                        
+//                        if(server.findUser(id).isMonopoly(propertyToConstruct.getColor())){
+                        
+                            
+                        
+//                        else
+//                            buildRequest.accepted = false;
+                        
+                        server.enviarPaqueteA(packet, socket);
+                        server.enviarPaqueteA(new UpdateUserPackage(server.findUser(id)), socket);
+                        server.enviarPaquete(new PropertiesUpdatePackage(server.game.properties));
+                        break;
        
                 }
             } catch(IOException | ClassNotFoundException e) { 

@@ -41,7 +41,39 @@ public class User implements Serializable {
         index = 0;
     }
     
+    public boolean isMonopoly(Color color){
+        int cant = 0;
+        
+        if(color == Color.WHITE)
+            cant = 2;
+        if(color == Color.CYAN)
+            cant = 3;
+        if(color == Color.PINK)
+            cant = 3;
+        if(color == Color.ORANGE)
+            cant = 3;
+        if(color == Color.RED)
+            cant = 3;
+        if(color == Color.YELLOW)
+            cant = 3;
+        if(color == Color.GREEN)
+            cant = 3;
+        if(color == Color.BLUE)
+            cant = 2;
+        
+        for(Property property : properties){
+            if(property.color == color)
+                cant--;
+        }
+        
+        if(cant==0)
+            return true;
+        return false;
+        
+    }
+    
     public void removeProperty(String name){
+        System.out.println("??????????????????????????");
         Property delete = null;
         for(Property property : properties){
             if(property.name.equals(name)){
@@ -98,6 +130,7 @@ public class User implements Serializable {
     }
 
     public void addTerrain(Property terrain) {
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx");
         properties.add(terrain);
     }
 }

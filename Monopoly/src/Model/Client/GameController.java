@@ -7,12 +7,14 @@ package Model.Client;
 
 import Model.Game.Property;
 import Model.Game.User;
+import Model.Packages.BuildRequestPackage;
 import Model.Packages.BuyRequestPackage;
 import Model.Packages.ChatPackage;
 import Model.Packages.DicesPackage;
 import Model.Packages.SellRequestPackage;
 import Model.Packages.TurnPackage;
 import Model.Packages.UserInfoRequestPackage;
+import View.ClientView.BuildingView;
 import View.ClientView.GameView;
 import View.ClientView.PropertyView;
 import View.ClientView.RailroadView;
@@ -25,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -43,12 +46,14 @@ class GameController  implements ActionListener {
     SellView sellView;
     SellRequestView sellRequestView;
     SellRequestPackage request;
+    BuildingView buildingView;
     
     public GameController(Client client, ArrayList<Property> properties,ArrayList<User> players){
         this.client = client;
         view = new GameView();
         view.setVisible(true);
         sellRequestView = new SellRequestView();
+        buildingView = new BuildingView(new String[]{});
         userIndex = 0;
         this.properties = properties;
         this.players = players;
@@ -148,7 +153,10 @@ class GameController  implements ActionListener {
         view.TradeButton.addActionListener(this);
         view.BuyButton.addActionListener(this);
         
-        //Sell Request butons
+        //Build Request buttons
+        buildingView.BuildButton.addActionListener(this);
+        
+        //Sell Request buttons
         sellRequestView.AcceptButton.addActionListener(this);
         sellRequestView.DeclineButton.addActionListener(this);
         
@@ -214,19 +222,10 @@ class GameController  implements ActionListener {
                 view.MediterraneanButton.setOpaque(true);
                 view.MediterraneanButton.setContentAreaFilled(true);
             }
-            else{
-                view.MediterraneanButton.setOpaque(false);
-                view.MediterraneanButton.setContentAreaFilled(false);
-            }
                     
             if(terrain.getName().equals( "Baltic Avenue")){
                 view.BalticButton.setOpaque(true);
                 view.BalticButton.setContentAreaFilled(true);
-            }
-            
-            else{view.BalticButton.setOpaque(false);
-                view.BalticButton.setContentAreaFilled(false);
-            
             }
             
             if(terrain.getName().equals("Oriental Avenue")){
@@ -234,214 +233,134 @@ class GameController  implements ActionListener {
                     view.OrientalButton.setContentAreaFilled(true);
             }
             
-            else{
-                view.OrientalButton.setOpaque(false);
-                view.OrientalButton.setContentAreaFilled(false);
-            }
+           
             if(terrain.getName().equals("Vermont Avenue")){
                     view.VermontButton.setOpaque(true);
                     view.VermontButton.setContentAreaFilled(true);
             }
-            
-            else{
-                view.VermontButton.setOpaque(false);
-                view.VermontButton.setContentAreaFilled(false);
-            }
+           
             
             if(terrain.getName().equals("Connecticut Avenue")){
                     view.ConnecticutButton.setOpaque(true);
                     view.ConnecticutButton.setContentAreaFilled(true);
             } 
-            else{
-                view.ConnecticutButton.setOpaque(false);
-                view.ConnecticutButton.setContentAreaFilled(false);
-            }
+           
             if(terrain.getName().equals("St. Charles Place")){
                 view.CharlesButton.setOpaque(true);
                 view.CharlesButton.setContentAreaFilled(true);
             }
 
-            else{
-                view.CharlesButton.setOpaque(false);
-                view.CharlesButton.setContentAreaFilled(false);
-            }
+           
             if(terrain.getName().equals("States Avenue")){
                 view.StatesButton.setOpaque(true);
                 view.StatesButton.setContentAreaFilled(true);
             } 
             
-            else{
-                view.StatesButton.setOpaque(false);
-                view.StatesButton.setContentAreaFilled(false);
-            }
+            
             if(terrain.getName().equals("Virginia Avenue")){
                     view.VirginiaButton.setOpaque(true);
                     view.VirginiaButton.setContentAreaFilled(true);
             }
-            else{
-                view.VirginiaButton.setOpaque(false);
-                view.VirginiaButton.setContentAreaFilled(false);
-            }
+            
             if(terrain.getName().equals("St. James Place")){
                     view.JamesButton.setOpaque(true);
                     view.JamesButton.setContentAreaFilled(true);
             }
-            else{
-                view.JamesButton.setOpaque(false);
-                    view.JamesButton.setContentAreaFilled(false);
-            }
+            
                 if(terrain.getName().equals("Tenessee Avenue")){
                     view.TenesseeButton.setOpaque(true);
                     view.TenesseeButton.setContentAreaFilled(true);
                 }     
-                else{
-                    view.TenesseeButton.setOpaque(false);
-                    view.TenesseeButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("New York Avenue")){
                     view.NewYorkButton.setOpaque(true);
                     view.NewYorkButton.setContentAreaFilled(true);
                 } 
-                else{
-                    view.NewYorkButton.setOpaque(false);
-                    view.NewYorkButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("Kentucky Avenue")){
                     view.KentuckyButton.setOpaque(true);
                     view.KentuckyButton.setContentAreaFilled(true);
                 }
-                else{
-                    view.KentuckyButton.setOpaque(false);
-                    view.KentuckyButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("Indiana Avenue")){
                     view.IndianaButton.setOpaque(true);
                     view.IndianaButton.setContentAreaFilled(true);
                 }      
-                else{
-                    view.IndianaButton.setOpaque(false);
-                    view.IndianaButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("Illinois Avenue")){
                     view.IllionisButton.setOpaque(true);
                     view.IllionisButton.setContentAreaFilled(true);
                 }
-                else{
-                    view.IllionisButton.setOpaque(false);
-                    view.IllionisButton.setContentAreaFilled(false);
-                }
+               
                 if(terrain.getName().equals("Atlantic Avenue")){
                     view.AtlanticButton.setOpaque(true);
                     view.AtlanticButton.setContentAreaFilled(true);
                 }
-                else{
-                    view.AtlanticButton.setOpaque(false);
-                    view.AtlanticButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("Ventor Avenue")){
                     view.VentnorButton.setOpaque(true);
                     view.VentnorButton.setContentAreaFilled(true);
                 }  
-                else{
-                    view.VentnorButton.setOpaque(false);
-                    view.VentnorButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("Marvin Gardens")){
                     view.MarvinButton.setOpaque(true);
                     view.MarvinButton.setContentAreaFilled(true);
                 }      
-                else{
-                    view.MarvinButton.setOpaque(false);
-                    view.MarvinButton.setContentAreaFilled(false);
-                }
+                
                 
                 if(terrain.getName().equals("Pacific Avenue")){
                     view.PacificButton.setOpaque(true);
                     view.PacificButton.setContentAreaFilled(true);
                 }
-                else{
-                    view.PacificButton.setOpaque(false);
-                    view.PacificButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("North Carolina Avenue")){
                     view.NorthButton.setOpaque(true);
                     view.NorthButton.setContentAreaFilled(true);
                 }      
-                else{
-                    view.NorthButton.setOpaque(false);
-                    view.NorthButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("Pennsylvania Avenue")){
                     view.PennsylvaniaButton.setOpaque(true);
                     view.PennsylvaniaButton.setContentAreaFilled(true);
                 }  
-                else{
-                    view.PennsylvaniaButton.setOpaque(false);
-                    view.PennsylvaniaButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("Park Place")){
                     view.ParkButton.setOpaque(true);
                     view.ParkButton.setContentAreaFilled(true);
                 }
-                else{
-                    view.ParkButton.setOpaque(false);
-                    view.ParkButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("Boardwalk")){
                     view.BoardwalkButoon.setOpaque(true);
                     view.BoardwalkButoon.setContentAreaFilled(true);
                 }
-                else{
-                    view.BoardwalkButoon.setOpaque(false);
-                    view.BoardwalkButoon.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("Reading Railroad")){
                     view.ReadingTrainButton.setOpaque(true);
                     view.ReadingTrainButton.setContentAreaFilled(true);
                 }     
-                else{
-                    view.ReadingTrainButton.setOpaque(false);
-                    view.ReadingTrainButton.setContentAreaFilled(false);
-                }
+               
                 if(terrain.getName().equals("Pennsylvania Railroad")){
                     view.PennsylvaniaTrainButton.setOpaque(true);
                     view.PennsylvaniaTrainButton.setContentAreaFilled(true);
                 }     
-                else{
-                    view.PennsylvaniaTrainButton.setOpaque(false);
-                    view.PennsylvaniaTrainButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("B. & O. Railroad")){
                     view.BOTrainButton.setOpaque(true);
                     view.BOTrainButton.setContentAreaFilled(true);
                 }
-                else{
-                    view.BOTrainButton.setOpaque(false);
-                    view.BOTrainButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("Short Line")){
                     view.BOTrainButton.setOpaque(true);
                     view.BOTrainButton.setContentAreaFilled(true);
                 }    
-                else{
-                    view.BOTrainButton.setOpaque(false);
-                    view.BOTrainButton.setContentAreaFilled(false);
-                }
+                
                 if(terrain.getName().equals("Electric Company")){
                     view.ElectricButton.setOpaque(true);
                     view.ElectricButton.setContentAreaFilled(true);
                 }     
-                else{
-                    view.ElectricButton.setOpaque(false);
-                    view.ElectricButton.setContentAreaFilled(false);
-                }
+                
                if(terrain.getName().equals("Water Works")){
                     view.WaterButton.setOpaque(true);
                     view.WaterButton.setContentAreaFilled(true);
-               }
-               else{
-                   view.WaterButton.setOpaque(false);
-                   view.WaterButton.setContentAreaFilled(false);
                }
         }
     }
@@ -670,6 +589,22 @@ class GameController  implements ActionListener {
             
         }
         
+        else if (e.getSource().equals(view.BuildButton)){
+            String[] properties = getPropertyName();
+            buildingView.PropertiesComboBox.setModel(new DefaultComboBoxModel<>(properties));
+            buildingView.setVisible(true);
+        }
+        
+        else if (e.getSource().equals(buildingView.BuildButton)){
+            BuildRequestPackage packet = new BuildRequestPackage((String) buildingView.PropertiesComboBox.getSelectedItem());
+            
+            try {
+                client.enviarPaquete(packet);
+            } catch (IOException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         else if (e.getSource().equals(view.MediterraneanButton) || e.getSource().equals(view.MediterraneanXButton)){
             new PropertyView(searchProperty("Mediterranean Avenue")).setVisible(true);
         }
@@ -847,6 +782,7 @@ class GameController  implements ActionListener {
 
     void updateUserInfo() {
         view.UserMoneyLabel.setText(String.valueOf(client.user.money));
+        clearButtons();
         updateProperties();
     }
 

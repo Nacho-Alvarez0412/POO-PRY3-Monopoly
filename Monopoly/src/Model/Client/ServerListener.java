@@ -5,6 +5,7 @@
  */
 package Model.Client;
 
+import Model.Game.Property;
 import Model.Game.User;
 import Model.Packages.*;
 import View.ClientView.RollDiceWindow;
@@ -148,6 +149,14 @@ public class ServerListener extends Thread{
                             client.gameController.sellRequestView.setVisible(true);
                         }
                         break;
+                        
+                    case "BuildRequest":
+                        BuildRequestPackage buildRequest = (BuildRequestPackage) packet;
+                        
+                        if(buildRequest.accepted)
+                            JOptionPane.showMessageDialog(client.gameController.buildingView, "New building added to your property!");
+                        else
+                            JOptionPane.showMessageDialog(client.gameController.buildingView, "Whoops! Seems you dont have the requirements for building!");
                         
 
                 }
