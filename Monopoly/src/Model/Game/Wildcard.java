@@ -20,6 +20,7 @@ public class Wildcard extends Card {
         super(Wildcard,0,0);
         this.info = info;
         this.wildcardType = type;
+        this.id = id;
     }
 
     public int getId() {

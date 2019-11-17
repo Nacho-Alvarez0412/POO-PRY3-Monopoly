@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -146,6 +147,7 @@ class GameController  implements ActionListener {
         view.MortgageButton.addActionListener(this);
         view.TradeButton.addActionListener(this);
         view.BuyButton.addActionListener(this);
+        view.WildcardButton.addActionListener(this);
         
         //Build Request buttons
         buildingView.BuildButton.addActionListener(this);
@@ -541,18 +543,35 @@ class GameController  implements ActionListener {
         
         else if (e.getSource().equals(view.RollButton)){
             view.EndTurnButton.setEnabled(true);
-            view.RollButton.setEnabled(false);
+            
             
             client.user.rollDices();
             
             view.Dice1Label.setIcon(client.user.dices.get(0).getFace());
             view.Dice2Label.setIcon(client.user.dices.get(1).getFace());
+            view.RollButton.setEnabled(false);
+            
+            if(client.user.dices.get(0).getValue() == client.user.dices.get(1).getValue()){
+                view.RollButton.setEnabled(true);
+            }
             
             try {
                 client.enviarPaquete(new DicesPackage(client.user.roll));
             } catch (IOException ex) {
                 Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        
+        else if (e.getSource().equals(view.WildcardButton)){
+            if(client.user.jail || client.user.wildcard){
+                try {
+                    client.enviarPaquete(new WildCardUsePackage());
+                } catch (IOException ex) {
+                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else
+                JOptionPane.showMessageDialog(client.gameController.view, "You dont have jail free cards to sell!");
         }
         
         else if (e.getSource().equals(view.MortgageButton)){

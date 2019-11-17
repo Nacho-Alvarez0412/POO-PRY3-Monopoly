@@ -5,8 +5,13 @@
  */
 package Model.Game;
 
+import Model.Packages.BankruptcyPackage;
+import Model.Packages.PropertiesUpdatePackage;
 import Model.Packages.TurnPackage;
+import Model.Packages.UpdateUserPackage;
+import Model.Packages.VictoryPackage;
 import Model.Server.Server;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +25,7 @@ public class Game extends Thread{
     int turn;
     Server server;
     boolean victory;
-    boolean userTurn;
+    public boolean userTurn;
     public ArrayList<Card> board;
     public ArrayList<Property> properties;
     public ArrayList<Wildcard> fortuneDeck;
@@ -70,6 +75,16 @@ public class Game extends Thread{
             turn = 0;
     }
     
+    public void moveToService(int id){
+        User player = players.get(id);
+        int index = player.index;
+        
+        while(properties.get(index).color != Color.LIGHT_GRAY){
+            index++;
+        }
+        player.roll = index - player.index;
+    }
+    
     public void movePlayer(int index){
         
         User user = findUser(index);
@@ -92,14 +107,16 @@ public class Game extends Thread{
             userTurn = true;
             
             while(userTurn){
-                
-                
-                
-                
-                
-                
-                
-                
+                if(checkUserState()){
+                    User player = players.get(turn);
+                    userTurn = false;
+                    player.bankruptcy = true;
+                    server.enviarPaquete(new BankruptcyPackage(player.name));
+                    clearProperties(player);
+                    server.enviarPaquete(new PropertiesUpdatePackage(properties));
+                    players.remove(turn);
+                }
+                    
                 try {
                     sleep(1000);
                 } catch (InterruptedException ex) {
@@ -107,8 +124,9 @@ public class Game extends Thread{
                 }
             }
             changeTurn();
-            
+            checkVictory();
         }
+        server.enviarPaquete(new VictoryPackage(players.get(0).name));
         
     }
 
@@ -118,5 +136,54 @@ public class Game extends Thread{
                 return property;
         }
         return null;
+    }
+
+    public void moveToRailroad(int id) {
+        User player = players.get(id);
+        int index = player.index;
+        
+        while(properties.get(index).color != Color.BLACK){
+            index++;
+        }
+        player.roll = index - player.index;
+    }
+
+    public void payPlayers(int cant, int id) {
+        for(User player : server.players){
+            if(player.id != id){
+                player.money += cant;
+                server.enviarPaqueteA(new UpdateUserPackage(player), server.listeners.get(player.id-1).socket);
+            }
+        }
+    }
+
+    public void collectMoney(int i, User player) {
+        for(User clients : players){
+            clients.money -= i;
+            player.money+=i;
+            server.enviarPaqueteA(new UpdateUserPackage(player), server.listeners.get(player.id-1).socket);
+        }
+    }
+
+    private boolean checkUserState() {
+        User player = players.get(turn);
+        if(player.money<=0)
+            return true;
+        return false;
+    }
+
+    private void clearProperties(User player) {
+        for(Property property : player.properties){
+            property.owner = null;
+            property.hotel = false;
+            property.houses = 0;
+        }
+        player.properties.clear();
+    }
+
+    private void checkVictory() {
+        
+        if(players.size() == 1)
+            victory = true;
     }
 }

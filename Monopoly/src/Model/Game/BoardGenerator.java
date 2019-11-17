@@ -104,41 +104,41 @@ public final class BoardGenerator {
     }
     
     public void generateFortuneCards(){
-        fortune.add(new Wildcard(1,"Advance to 'Go'. (Collect $200)",true));
-        fortune.add(new Wildcard(2,"Advance to Illinois Ave. If you pass Go, collect $200. ",true));
-        fortune.add(new Wildcard(3,"Advance to St. Charles Place. If you pass Go, collect $200.",true));
-        fortune.add(new Wildcard(4,"Advance token to nearest Service. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner.",true));
-        fortune.add(new Wildcard(5,"Advance token to the nearest Railroad and pay owner. If Railroad is unowned, you may buy it from the Bank.",true));
-        fortune.add(new Wildcard(6,"Bank pays you dividend of $50.",true));
-        fortune.add(new Wildcard(7,"Get out of Jail Free. This card may be kept until needed, or sold for $100.",true));
-        fortune.add(new Wildcard(8,"Go Back Three 3 Spaces.",true));
-        fortune.add(new Wildcard(9,"Go to Jail. Go directly to Jail. Do not pass GO, do not collect $200.",true));
-        fortune.add(new Wildcard(10,"Make general repairs on all your property: For each house pay $25, For each hotel pay $100.",true));
-        fortune.add(new Wildcard(11,"Pay poor tax of $15 ",true));
-        fortune.add(new Wildcard(12,"Take a trip to Reading Railroad. If you pass Go, collect $200. ",true));
-        fortune.add(new Wildcard(13,"Take a walk on the Boardwalk. Advance token to Boardwalk.",true));
-        fortune.add(new Wildcard(14,"You have been elected Chairman of the Board. Pay each player $50. ",true));
-        fortune.add(new Wildcard(15,"Your building and loan matures. Receive $150.",true));
-        fortune.add(new Wildcard(16,"You have won a crossword competition. Collect $100.",true));
+        fortune.add(new Wildcard(1,"<html>Advance to 'Go'. <br/>(Collect $200)</html>",true));
+        fortune.add(new Wildcard(2,"<html>Advance to Illinois Ave. <br/>If you pass Go, collect $200.</html> ",true));
+        fortune.add(new Wildcard(3,"<html>Advance to St. Charles Place. <br/>If you pass Go, collect $200.</html>",true));
+        fortune.add(new Wildcard(4,"<html>Advance token to nearest Service. <br/>If unowned you may buy it from the Bank.<br/> If owned, throw dice and pay owner.</html>",true));
+        fortune.add(new Wildcard(5,"<html>Advance token to the nearest Railroad and pay owner. <br/>If Railroad is unowned,\n you may buy it from the Bank.</html>",true));
+        fortune.add(new Wildcard(6,"<html>Bank pays you <br/>dividend of $50.</html>",true));
+        fortune.add(new Wildcard(7,"<html>Get out of Jail Free. <br/>This card may be kept until needed, or sold for $100.</html>",true));
+        fortune.add(new Wildcard(8,"<html>Go Back Three 3 Spaces.</html>",true));
+        fortune.add(new Wildcard(9,"<html>Go to Jail. Go directly to Jail. <br/>Do not pass GO, do not collect $200.</html>",true));
+        fortune.add(new Wildcard(10,"<html>Make general repairs on all your property:<br/> For each house pay $25, For each hotel pay $100.</html>",true));
+        fortune.add(new Wildcard(11,"<html>Pay poor tax of $15 </html>",true));
+        fortune.add(new Wildcard(12,"<html>Take a trip to Reading Railroad.<br/> If you pass Go, collect $200.</html> ",true));
+        fortune.add(new Wildcard(13,"<html>Take a walk on the Boardwalk.<br/> Advance token to Boardwalk.</html>",true));
+        fortune.add(new Wildcard(14,"<html>You have been elected Chairman of the Board. <br/>Pay each player $50.</html> ",true));
+        fortune.add(new Wildcard(15,"<html>Your building and loan matures. <br/>Receive $150.</html>",true));
+        fortune.add(new Wildcard(16,"<html>You have won a crossword competition. <br/>Collect $100.</html>",true));
     }
     
     public void generateCommunityChestCards(){
-        communityChest.add(new Wildcard(1,"Advance to 'Go'. (Collect $200)",false));
-        communityChest.add(new Wildcard(2,"Bank error in your favor. Collect $200.",false));
-        communityChest.add(new Wildcard(3,"Doctor's fees. Pay $50.",false));
-        communityChest.add(new Wildcard(4,"From sale of stock you get $50.",false));
-        communityChest.add(new Wildcard(5,"Get out of Jail Free. This card may be kept until needed, or sold for $100.",false));
-        communityChest.add(new Wildcard(6,"Go to Jail. Go directly to jail. Do not pass Go, Do not collect $200. ",false));
-        communityChest.add(new Wildcard(7,"Grand Opera Night. Collect $50 from every player for opening night seats.",false));
-        communityChest.add(new Wildcard(8,"Holiday Fund matures. Receive $100.",false));
-        communityChest.add(new Wildcard(9,"Income tax refund. Collect $20.",false));
-        communityChest.add(new Wildcard(10,"It's your birthday. Collect $10 from every player. ",false));
-        communityChest.add(new Wildcard(11,"Life insurance matures – Collect $100",false));
-        communityChest.add(new Wildcard(12,"Hospital Fees. Pay $50. ",false));
-        communityChest.add(new Wildcard(13,"School fees. Pay $50.",false));
-        communityChest.add(new Wildcard(14,"Receive $25 consultancy fee.",false));
-        communityChest.add(new Wildcard(15,"You are assessed for street repairs: Pay $40 per house and $115 per hotel you own.",false));
-        communityChest.add(new Wildcard(16,"You have won second prize in a beauty contest. Collect $10.",false));
+        communityChest.add(new Wildcard(1,"<html>Advance to 'Go'. <br/>(Collect $200)</html>",false));
+        communityChest.add(new Wildcard(2,"<html>Bank error in your favor. <br/>Collect $200.</html>",false));
+        communityChest.add(new Wildcard(3,"<html>Doctor's fees. <br/>Pay $50.</html>",false));
+        communityChest.add(new Wildcard(4,"<html>From sale of stock <br/>you get $50.</html>",false));
+        communityChest.add(new Wildcard(5,"<html>Get out of Jail Free. <br/>This card may be kept until needed,<br/> or sold for $100.</html>",false));
+        communityChest.add(new Wildcard(6,"<html>Go to Jail. <br/>Go directly to jail. <br/>Do not pass Go, <br/>Do not collect $200.</html> ",false));
+        communityChest.add(new Wildcard(7,"<html>Grand Opera Night. <br/>Collect $50 from every player<br/> for opening night seats.</html>",false));
+        communityChest.add(new Wildcard(8,"<html>Holiday Fund matures. <br/>Receive $100.</html>",false));
+        communityChest.add(new Wildcard(9,"<html>Income tax refund. <br/>Collect $20.</html>",false));
+        communityChest.add(new Wildcard(10,"<html>It's your birthday. <br/>Collect $10 from every player.</html> ",false));
+        communityChest.add(new Wildcard(11,"<html>Life insurance matures <br/>Collect $100</html>",false));
+        communityChest.add(new Wildcard(12,"<html>Hospital Fees. <br/>Pay $50.</html> ",false));
+        communityChest.add(new Wildcard(13,"<html>School fees. <br/>Pay $50.</html>",false));
+        communityChest.add(new Wildcard(14,"<html>Receive $25 <br/>consultancy fee.</html>",false));
+        communityChest.add(new Wildcard(15,"<html>You are assessed for street repairs: <br/>Pay $40 per house<br/> and $115 per hotel you own.</html>",false));
+        communityChest.add(new Wildcard(16,"<html>You have won second prize in a<br/> beauty contest.<br/> Collect $10.</html>",false));
     }
     
     public void generateSpecialCards(){

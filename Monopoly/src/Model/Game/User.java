@@ -26,6 +26,10 @@ public class User implements Serializable {
     public int index;
     public JLabel inGameAppereance;
     int lap;
+    public int sentenceTime;
+    public boolean jail;
+    public boolean wildcard;
+    public boolean bankruptcy;
     
     
     //Metodos
@@ -39,6 +43,9 @@ public class User implements Serializable {
         dices.add(new Dice());
         properties = new ArrayList<>();
         index = 0;
+        jail = false;
+        wildcard = false;
+        bankruptcy = false;
     }
     
     public boolean isMonopoly(Color color){
@@ -73,7 +80,6 @@ public class User implements Serializable {
     }
     
     public void removeProperty(String name){
-        System.out.println("??????????????????????????");
         Property delete = null;
         for(Property property : properties){
             if(property.name.equals(name)){
@@ -130,7 +136,15 @@ public class User implements Serializable {
     }
 
     public void addTerrain(Property terrain) {
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxx");
         properties.add(terrain);
+    }
+
+    public void Repair(int house ,int hotel) {
+        for( Property property : properties){
+            money -= house*property.houses;
+            
+            if(property.isHotel())
+                money -= hotel;
+        }
     }
 }

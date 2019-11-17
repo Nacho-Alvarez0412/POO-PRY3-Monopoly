@@ -6,7 +6,10 @@
 package Model.Client;
 
 import Model.Game.User;
+import Model.Game.Wildcard;
 import Model.Packages.*;
+import View.ClientView.ChanceViewCard;
+import View.ClientView.CommunityChestView;
 import View.ClientView.RollDiceWindow;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -35,11 +38,33 @@ public class ServerListener extends Thread{
                 Model.Packages.Package packet = (Model.Packages.Package) in.readObject();
                 
                 switch (packet.type){
-                    
+                    case "Info":
+                        InfoPackage infoPackage = (InfoPackage) packet;
+                        JOptionPane.showMessageDialog(client.gameController.sellView, infoPackage.info);   
+                        break;
+                        
+                        
                     case "Chat":
                         ChatPackage chatPackage = (ChatPackage) packet;
                         String message = chatPackage.message;
                         client.gameController.view.ChatTextArea.append(message+"\n");
+                        break;
+                        
+                    case "Wildcard":
+                        WildcardPackage wildcard = (WildcardPackage) packet;
+                        
+                        if(wildcard.card.isWildcardType()){
+                            ChanceViewCard viewCard = new ChanceViewCard();
+                            viewCard.InfoCard.setText(wildcard.card.getInfo());
+                            viewCard.setVisible(true);
+                        }
+                        
+                        else{
+                            CommunityChestView viewCard = new CommunityChestView();
+                            viewCard.InfoCard.setText(wildcard.card.getInfo());
+                            viewCard.setVisible(true);
+                        }
+                        
                         break;
                         
                     case "DicesRoll":
@@ -79,8 +104,16 @@ public class ServerListener extends Thread{
                         TurnPackage turnInfo = (TurnPackage) packet;
                         client.gameController.view.TurnLabel.setText(turnInfo.name);
                         
+                        if(client.user.wildcard){
+                            client.gameController.view.WildcardButton.setEnabled(true);
+                        }
                         if(turnInfo.name.equals(client.user.name)){
-                            client.gameController.view.RollButton.setEnabled(true);
+                            if(!client.user.jail)
+                                client.gameController.view.RollButton.setEnabled(true);
+                            else{
+                                JOptionPane.showMessageDialog(client.gameController.view, "You're in jail! you can buy your way out or use your wildcard!");
+                                client.gameController.view.EndTurnButton.setEnabled(true);
+                            }
                         }
                         break;
                         
@@ -183,6 +216,17 @@ public class ServerListener extends Thread{
                             JOptionPane.showMessageDialog(client.gameController.view, "Your property has been mortgaged successfully");
                         else
                             JOptionPane.showMessageDialog(client.gameController.view, "Your property has been unmortgaged successfully");
+                        
+                    case "Bankruptcy":
+                        BankruptcyPackage finalPackage = (BankruptcyPackage) packet;
+                        JOptionPane.showMessageDialog(client.gameController.view, finalPackage.name+" has been declared bankrupt, all properties are available for buying");
+                        break;
+                        
+                    case "VictorySignal":
+                        VictoryPackage winner = (VictoryPackage) packet;
+                        JOptionPane.showMessageDialog(client.gameController.view, winner.winner+" has won the game!");
+                        break;
+                        
                 }
             }
         } catch (IOException ex) {
@@ -192,4 +236,5 @@ public class ServerListener extends Thread{
         }
     
     }
+
 }

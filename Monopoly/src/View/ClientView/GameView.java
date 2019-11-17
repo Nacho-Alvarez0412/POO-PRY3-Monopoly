@@ -159,6 +159,7 @@ public class GameView extends javax.swing.JFrame {
         MortgageButton = new javax.swing.JButton();
         TradeButton = new javax.swing.JButton();
         BuyButton = new javax.swing.JButton();
+        WildcardButton = new javax.swing.JButton();
         Player1IconLabel = new javax.swing.JLabel();
         Player2IconLabel = new javax.swing.JLabel();
         Player3IconLabel = new javax.swing.JLabel();
@@ -279,12 +280,17 @@ public class GameView extends javax.swing.JFrame {
         TradeButton.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         TradeButton.setText("TRADE");
         ButtonsPanel.add(TradeButton);
-        TradeButton.setBounds(990, 10, 180, 50);
+        TradeButton.setBounds(790, 10, 180, 50);
 
         BuyButton.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         BuyButton.setText("BUY");
         ButtonsPanel.add(BuyButton);
         BuyButton.setBounds(1200, 10, 180, 50);
+
+        WildcardButton.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        WildcardButton.setText("JAIL FEE");
+        ButtonsPanel.add(WildcardButton);
+        WildcardButton.setBounds(990, 10, 180, 50);
 
         infoPanel.add(ButtonsPanel);
         ButtonsPanel.setBounds(0, 830, 1400, 80);
@@ -867,6 +873,7 @@ public class GameView extends javax.swing.JFrame {
     public javax.swing.JButton VirginiaXButton;
     public javax.swing.JButton WaterButton;
     public javax.swing.JButton WaterXButton;
+    public javax.swing.JButton WildcardButton;
     private javax.swing.JPanel infoPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
