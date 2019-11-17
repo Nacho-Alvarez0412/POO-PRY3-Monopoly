@@ -75,27 +75,34 @@ public class ClientListener extends Thread{
                         if(server.gameState){
                             String Servermessage ="Server: " + server.findUser(id).name + " rolled a "+userRoll.value;
                             server.enviarPaquete(new ChatPackage(Servermessage));
-                            
-                            server.findUser(id).roll = userRoll.value;
-                            server.game.movePlayer(id);
                             User player = server.findUser(id);
-                            Card property = server.game.board.get(player.index);                            
-                            
-                            server.enviarPaquete(new UserMovementPackage(player.index, id,property.getX(),property.getY()) );
-                            
-                            if(property.getType() == EnumCardType.Property){
-                                Property terrain = (Property) property;
-                                if(terrain.getOwner() != null && terrain.getOwner() != player){
-                                    player.money -= terrain.getRentPrice();
-                                    terrain.getOwner().money += terrain.getRentPrice();
-                                    server.enviarPaqueteA(new RentSignalPackage(terrain.getRentPrice()), socket);
+                            if(!player.jail){
+                                server.findUser(id).roll = userRoll.value;
+                                server.game.movePlayer(id);
+                                
+                                Card property = server.game.board.get(player.index);                            
+
+                                server.enviarPaquete(new UserMovementPackage(player.index, id,property.getX(),property.getY()) );
+
+                                if(property.getType() == EnumCardType.Property){
+                                    Property terrain = (Property) property;
+                                    if(terrain.getOwner() != null && terrain.getOwner() != player){
+                                        player.money -= terrain.getRentPrice();
+                                        terrain.getOwner().money += terrain.getRentPrice();
+                                        server.enviarPaqueteA(new RentSignalPackage(terrain.getRentPrice()), socket);
+                                    }
                                 }
+
+                                else if(property.getType() == EnumCardType.Special){
+                                    SpecialCard terrain = (SpecialCard) property;
+                                    executeTileAction(terrain,player);
+
+                                }
+                                
                             }
-                            
-                            else if(property.getType() == EnumCardType.Special){
-                                SpecialCard terrain = (SpecialCard) property;
-                                executeTileAction(terrain,player);
-                            
+                            else{
+                                if(userRoll.doubles)
+                                    player.jail = false;
                             }
                             server.enviarPaqueteA(new UpdateUserPackage(player), socket);
                             server.enviarPaquete(new PropertiesUpdatePackage(server.game.properties));
@@ -390,11 +397,13 @@ public class ClientListener extends Thread{
                     player.index -= 3;
                     property = server.game.board.get(player.index);                            
                     server.enviarPaquete(new UserMovementPackage(player.index, id,property.getX(),property.getY()) );
+                    server.enviarPaqueteA(new UpdateUserPackage(player),server.listeners.get(player.id-1).socket);
                     break;
                     
                 case 9:
                     player.index = 10;
                     player.jail = true;
+                    player.sentenceTime = 3;
                     property = server.game.board.get(player.index);                            
                     server.enviarPaquete(new UserMovementPackage(player.index, id,property.getX(),property.getY()) );
                     break;
@@ -460,6 +469,7 @@ public class ClientListener extends Thread{
                 case 6:
                     player.index = 10;
                     player.jail = true;
+                    player.sentenceTime = 3;
                     property = server.game.board.get(player.index);                            
                     server.enviarPaquete(new UserMovementPackage(player.index, id,property.getX(),property.getY()) );
                     break;

@@ -550,13 +550,17 @@ class GameController  implements ActionListener {
             view.Dice1Label.setIcon(client.user.dices.get(0).getFace());
             view.Dice2Label.setIcon(client.user.dices.get(1).getFace());
             view.RollButton.setEnabled(false);
+            DicesPackage packet = new DicesPackage(client.user.roll);
+            packet.doubles = false;
             
             if(client.user.dices.get(0).getValue() == client.user.dices.get(1).getValue()){
                 view.RollButton.setEnabled(true);
+                packet.doubles = true;
             }
             
+            
             try {
-                client.enviarPaquete(new DicesPackage(client.user.roll));
+                client.enviarPaquete(packet);
             } catch (IOException ex) {
                 Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }

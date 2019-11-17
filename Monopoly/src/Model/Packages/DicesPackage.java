@@ -11,6 +11,7 @@ package Model.Packages;
  */
 public class DicesPackage extends Package{
     public int value;
+    public boolean doubles;
     public DicesPackage(int value) {
         super("DicesRoll");
         this.value = value;

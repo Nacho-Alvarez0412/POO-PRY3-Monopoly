@@ -113,6 +113,7 @@ public class ServerListener extends Thread{
                             else{
                                 JOptionPane.showMessageDialog(client.gameController.view, "You're in jail! you can buy your way out or use your wildcard!");
                                 client.gameController.view.EndTurnButton.setEnabled(true);
+                                client.gameController.view.RollButton.setEnabled(true);
                             }
                         }
                         break;

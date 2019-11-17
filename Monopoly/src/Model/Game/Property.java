@@ -109,7 +109,8 @@ public class Property extends Card implements Serializable{
     
     public int getRentPrice(){
         int extra = 10*houses;
-        
+        if(hotel)
+            extra += 150;
         return rent+extra;
     }
 
