@@ -25,7 +25,7 @@ public class User implements Serializable {
     public int money;
     public int index;
     public JLabel inGameAppereance;
-    int lap;
+     public int lap;
     public int sentenceTime;
     public boolean jail;
     public boolean wildcard;
@@ -43,6 +43,7 @@ public class User implements Serializable {
         dices.add(new Dice());
         properties = new ArrayList<>();
         index = 0;
+        lap = 0;
         jail = false;
         wildcard = false;
         bankruptcy = false;

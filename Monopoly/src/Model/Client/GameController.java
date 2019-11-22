@@ -570,6 +570,7 @@ class GameController  implements ActionListener {
             if(client.user.jail || client.user.wildcard){
                 try {
                     client.enviarPaquete(new WildCardUsePackage());
+                    client.user.wildcard = false;
                 } catch (IOException ex) {
                     Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -627,11 +628,11 @@ class GameController  implements ActionListener {
         }
         
         else if(e.getSource().equals(view.BuyButton)){
-            try {
-                client.enviarPaquete(new BuyRequestPackage(client.user.index));
-            } catch (IOException ex) {
-                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                try {
+                    client.enviarPaquete(new BuyRequestPackage(client.user.index));
+                } catch (IOException ex) {
+                    Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                }
         }
         
         else if(e.getSource().equals(view.SellButton)){

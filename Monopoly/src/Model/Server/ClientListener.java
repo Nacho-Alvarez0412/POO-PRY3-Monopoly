@@ -83,6 +83,7 @@ public class ClientListener extends Thread{
                                 Card property = server.game.board.get(player.index);                            
 
                                 server.enviarPaquete(new UserMovementPackage(player.index, id,property.getX(),property.getY()) );
+                                server.enviarPaqueteA(new UpdateUserPackage(player),this.socket);
 
                                 if(property.getType() == EnumCardType.Property){
                                     Property terrain = (Property) property;
@@ -101,8 +102,9 @@ public class ClientListener extends Thread{
                                 
                             }
                             else{
-                                if(userRoll.doubles)
+                                if(userRoll.doubles){
                                     player.jail = false;
+                                }
                             }
                             server.enviarPaqueteA(new UpdateUserPackage(player), socket);
                             server.enviarPaquete(new PropertiesUpdatePackage(server.game.properties));
@@ -356,6 +358,7 @@ public class ClientListener extends Thread{
             switch (card.getId()){
                 case 1: //Advance to Go
                     player.index = 0;
+                    player.money += 200;
                     property = server.game.board.get(player.index);                            
                     server.enviarPaquete(new UserMovementPackage(player.index, id,property.getX(),property.getY()) );
                     break;
